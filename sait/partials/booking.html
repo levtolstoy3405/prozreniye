@@ -1,0 +1,29 @@
+<section class="contact" id="book">
+  <div class="wrap">
+    <div>
+      <h2>{{BOOK_TITLE}}</h2>
+      <p class="intro">Оставьте номер, и администратор перезвонит в рабочее время: подберёт удобный день и расскажет, как подготовиться.</p>
+      <form data-demo>
+        <div class="row">
+          <label>Имя<input required placeholder="Как к вам обращаться" autocomplete="given-name"></label>
+          <label>Телефон<input required type="tel" placeholder="+7 ___ ___-__-__" autocomplete="tel"></label>
+        </div>
+        <div class="row">
+          <label>Услуга<select name="service"><option value="diag">Диагностика зрения</option><option value="lkz">Лазерная коррекция</option><option value="cat">Хирургия катаракты</option><option value="kids">Детская офтальмология</option><option value="retina">Лечение сетчатки</option><option value="unknown">Пока не знаю</option></select></label>
+          <label>Врач<select name="doc"><option value="any">Любой свободный</option><option value="aliev">Алиев А. А.-Г.</option><option value="nurudinov">Нурудинов М. М.</option><option value="abdulaev">Абдулаев А. Б.</option><option value="zakieva">Закиева С. И.</option><option value="kazieva">Казиева А. Г.</option></select></label>
+        </div>
+        <label class="agree"><input type="checkbox" required> Согласен с обработкой персональных данных</label>
+        <button class="btn btn-navy">Отправить заявку</button>
+        <div class="ok">Спасибо! Это демо-форма: в рабочей версии заявка уйдёт администратору.</div>
+      </form>
+    </div>
+    <div>
+      <div class="photo"><img src="https://prozrenie-clinic.ru/_nuxt/img/m_about-1.4be447d.jpg" alt="Здание клиники «Прозрение» на проспекте Имама Шамиля" style="object-position:center 35%" loading="lazy"></div>
+      <dl>
+        <dt>Адрес</dt><dd>Махачкала, проспект Имама Шамиля, 18д</dd>
+        <dt>Часы</dt><dd>Пн–Сб 9:00–19:00, Вс 10:00–18:00</dd>
+        <dt>Телефон</dt><dd><a class="num" href="tel:+79896608788">+7 989 660-87-88</a></dd>
+      </dl>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="https://prozrenie-clinic.ru/_nuxt/img/logo-eye.5ff75d0.png" alt=""><span>ПРОЗРЕНИЕ<small>глазная клиника</small></span></a>
+    <nav class="nav" aria-label="Основное меню">
+      <div class="dd">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-uslugi"{{CUR:uslugi}}>Услуги <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <div class="dd-panel" id="dd-uslugi">
+          <a href="lazernaya-korrekciya.html"><b>Лазерная коррекция</b><span>SUPER LASIK · 40 000 ₽</span></a>
+          <a href="katarakta.html"><b>Хирургия катаракты</b><span>операция с линзой от 40 000 ₽</span></a>
+          <a href="detskaya-oftalmologiya.html"><b>Детская офтальмология</b><span>амблиопия, косоглазие</span></a>
+          <a href="diagnostika.html"><b>Диагностика зрения</b><span>20 тестов за 40 минут · 3 000 ₽</span></a>
+          <a class="all" href="ceny.html">Все услуги и цены →</a>
+        </div>
+      </div>
+      <a href="vrachi.html"{{CUR:vrachi}}>Врачи</a><a href="ceny.html"{{CUR:ceny}}>Цены</a><a href="otzyvy.html"{{CUR:otzyvy}}>Отзывы</a><a href="o-klinike.html"{{CUR:about}}>О клинике</a><a href="o-klinike.html#kontakty">Контакты</a>
+    </nav>
+    <a class="tel num" href="tel:+79896608788">+7 989 660-87-88</a>
+    <a class="btn btn-light" href="#book">Записаться</a>
+    <a class="call" href="tel:+79896608788" aria-label="Позвонить в клинику"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
+    <button class="burger" type="button" data-open-menu aria-label="Открыть меню" aria-controls="menu"><span></span></button>
+  </div>
+</header>
+<dialog class="menu" id="menu" aria-label="Меню">
+  <div class="wrap">
+    <div class="bar"><a class="logo" href="index.html"><img src="https://prozrenie-clinic.ru/_nuxt/img/logo-eye.5ff75d0.png" alt=""><span>ПРОЗРЕНИЕ<small>глазная клиника</small></span></a><button class="close" type="button" data-close-menu aria-label="Закрыть меню">×</button></div>
+    <nav aria-label="Мобильное меню">
+      <a href="index.html"{{CUR:home}}>Главная</a>
+      <div class="msub"><span>Услуги</span><a href="lazernaya-korrekciya.html"{{CUR:lkz}}>Лазерная коррекция</a><a href="katarakta.html"{{CUR:katarakta}}>Хирургия катаракты</a><a href="detskaya-oftalmologiya.html"{{CUR:detskaya}}>Детская офтальмология</a><a href="diagnostika.html"{{CUR:diagnostika}}>Диагностика</a></div>
+      <a href="vrachi.html"{{CUR:vrachi}}>Врачи</a><a href="ceny.html"{{CUR:ceny}}>Цены</a><a href="otzyvy.html"{{CUR:otzyvy}}>Отзывы</a><a href="o-klinike.html"{{CUR:about}}>О клинике</a><a href="o-klinike.html#kontakty">Контакты</a>
+    </nav>
+    <div class="foot">
+      <span>пр. Имама Шамиля, 18д · Пн–Сб 9–19, Вс 10–18</span>
+      <a class="btn btn-ghost" href="tel:+79896608788">+7 989 660-87-88</a>
+      <a class="btn btn-light" href="#book" data-close-menu>Записаться на приём</a>
+    </div>
+  </div>
+</dialog>

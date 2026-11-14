@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Операция на катаракте в Махачкале · Прозрение · Вариант 3 «Лендинг»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: oklch(0.99 0.002 260);
+  --tint: oklch(0.96 0.012 260);
+  --tint-2: oklch(0.93 0.02 260);
+  --ink: oklch(0.21 0.05 265);
+  --body: oklch(0.34 0.035 265);
+  --muted: oklch(0.47 0.03 265);
+  --line: oklch(0.89 0.012 265);
+  --navy: oklch(0.29 0.10 265);
+  --brand: oklch(0.50 0.20 355);
+  --brand-hover: oklch(0.45 0.19 355);
+  --brand-soft: oklch(0.95 0.03 355);
+  --ok: oklch(0.55 0.13 155);
+  --ease: cubic-bezier(.16,1,.3,1);
+  --wrap: min(1180px, 100% - 2*clamp(16px, 4vw, 40px));
+  --z-sticky: 10;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"Onest",system-ui,sans-serif;background:var(--bg);color:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:var(--wrap);margin-inline:auto}
+h1,h2,h3{color:var(--ink);font-weight:700;letter-spacing:-0.025em;line-height:1.08;text-wrap:balance}
+h1{font-size:clamp(2.3rem,1.5rem + 3.2vw,4.2rem);font-weight:800}
+h2{font-size:clamp(1.9rem,1.3rem + 2vw,3rem)}
+h3{font-size:1.2rem;letter-spacing:-0.01em;line-height:1.3}
+p{text-wrap:pretty}
+.num{font-variant-numeric:tabular-nums}
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-weight:600;font-size:16px;border:0;border-radius:14px;padding:16px 26px;min-height:54px;cursor:pointer;text-decoration:none;transition:background .2s,transform .3s var(--ease),box-shadow .3s}
+.btn:active{transform:scale(.98)}
+.btn-brand{background:var(--brand);color:#fff;box-shadow:0 10px 30px -12px oklch(0.5 0.2 355 / .6)}
+.btn-brand:hover{background:var(--brand-hover)}
+.btn-line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn-line:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+
+/* top */
+.top{position:sticky;top:0;z-index:var(--z-sticky);background:color-mix(in oklch,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;color:var(--navy);letter-spacing:.06em;font-size:15px}
+.logo img{width:36px;height:36px;object-fit:contain}
+.top .info{margin-left:auto;text-align:right;font-size:13px;color:var(--muted);line-height:1.3}
+.top .info a{display:block;font-size:17px;font-weight:700;color:var(--ink);text-decoration:none}
+.top .btn{min-height:44px;padding:10px 18px;font-size:15px}
+
+/* hero */
+.hero{padding-block:clamp(32px,5vw,72px) clamp(56px,6vw,96px);background:linear-gradient(180deg,var(--tint),var(--bg))}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,56px);align-items:start}
+.crumb{display:inline-flex;gap:8px;align-items:center;font-size:14px;font-weight:500;color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px}
+.crumb i{width:20px;height:20px;border-radius:50%;background:var(--ok);display:grid;place-items:center;color:#fff;font-style:normal;font-size:12px}
+.hero h1{margin-top:22px}
+.hero h1 span{color:var(--brand)}
+.hero .lead{font-size:clamp(1.05rem,1rem + .3vw,1.25rem);margin-top:22px;max-width:40ch}
+.facts{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 36px;margin-top:32px}
+.facts b{display:block;font-size:1.6rem;color:var(--ink);font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.facts span{font-size:14px;color:var(--muted)}
+.hero .photo{margin-top:36px;border-radius:24px;overflow:hidden;aspect-ratio:16/8;position:relative}
+.hero .photo img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+
+.lead-card{background:#fff;border-radius:24px;padding:clamp(22px,3vw,34px);box-shadow:0 30px 60px -30px oklch(0.3 0.08 265 / .35),0 0 0 1px var(--line);position:sticky;top:92px}
+.lead-card .price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.lead-card .price b{font-size:2.4rem;color:var(--ink);font-weight:800;letter-spacing:-.03em}
+.lead-card .price span{color:var(--muted);font-size:15px}
+.lead-card h2{font-size:1.35rem;margin-top:6px;letter-spacing:-.01em}
+.lead-card ul{list-style:none;padding:0;margin-top:16px;display:grid;gap:8px;font-size:15px}
+.lead-card li{display:flex;gap:10px}
+.lead-card li::before{content:"✓";color:var(--ok);font-weight:700}
+form{display:grid;gap:12px;margin-top:22px}
+input{font:inherit;font-size:16px;color:var(--ink);background:var(--tint);border:1.5px solid transparent;border-radius:12px;padding:15px 16px;min-height:54px;transition:border-color .2s,background .2s}
+input::placeholder{color:oklch(0.52 0.025 265)}
+input:focus{outline:none;border-color:var(--navy);background:#fff}
+.agree{display:flex;gap:10px;font-size:13px;color:var(--muted)}
+.agree input{min-height:0;width:18px;height:18px;padding:0;accent-color:var(--brand);margin-top:2px;flex:none}
+.small{font-size:13px;color:var(--muted);text-align:center}
+.ok{display:none;padding:16px;border-radius:12px;background:oklch(0.95 0.04 155);color:oklch(0.33 0.08 155);font-size:15px}
+form.sent .ok{display:block}
+
+section{padding-block:clamp(64px,8vw,112px)}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:24px 48px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,48px)}
+.sh p{max-width:46ch;color:var(--muted)}
+
+/* symptoms */
+.symp .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:start}
+.checks{display:grid;gap:10px}
+.checks label{display:flex;gap:14px;align-items:center;padding:16px 18px;border-radius:14px;background:var(--tint);cursor:pointer;font-weight:500;color:var(--ink);transition:background .2s}
+.checks label:hover{background:var(--tint-2)}
+.checks input{appearance:none;min-height:0;width:24px;height:24px;padding:0;border-radius:7px;background:#fff;border:1.5px solid var(--line);display:grid;place-items:center;flex:none;cursor:pointer}
+.checks input:checked{background:var(--brand);border-color:var(--brand)}
+.checks input:checked::after{content:"✓";color:#fff;font-size:14px;font-weight:700}
+.checks label:has(input:checked){background:var(--brand-soft)}
+.verdict{margin-top:20px;border-radius:16px;padding:20px 22px;background:var(--navy);color:#fff;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.verdict b{font-size:1.15rem}
+.verdict p{font-size:15px;opacity:.85;margin-top:2px}
+.verdict .btn{min-height:46px;padding:10px 18px;font-size:15px;background:#fff;color:var(--navy);box-shadow:none}
+
+/* steps */
+.steps{background:var(--navy);color:oklch(0.88 0.03 265)}
+.steps h2{color:#fff}
+.steps .sh p{color:oklch(0.82 0.03 265)}
+.tl{list-style:none;padding:0;display:grid;grid-template-columns:repeat(7,1fr);gap:0;position:relative}
+.tl::before{content:"";position:absolute;top:20px;left:20px;right:20px;height:2px;background:oklch(0.42 0.09 265)}
+.tl li{position:relative;padding-right:16px}
+.tl .n{width:42px;height:42px;border-radius:50%;background:var(--navy);box-shadow:inset 0 0 0 2px oklch(0.55 0.1 265);display:grid;place-items:center;color:#fff;font-weight:700;position:relative}
+.tl li.key .n{background:var(--brand);box-shadow:none}
+.tl h3{color:#fff;font-size:1.02rem;margin-top:18px}
+.tl p{font-size:14px;margin-top:6px;line-height:1.5}
+.tl .t{display:block;font-size:13px;color:oklch(0.78 0.1 355);font-weight:600;margin-top:4px}
+
+/* lens picker */
+.picker{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;align-items:stretch}
+.opts{display:grid;gap:10px}
+.opts button{all:unset;box-sizing:border-box;cursor:pointer;padding:18px 20px;border-radius:16px;background:var(--tint);color:var(--ink);font-weight:500;display:flex;gap:14px;align-items:center;transition:background .2s,box-shadow .2s}
+.opts button:hover{background:var(--tint-2)}
+.opts button:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.opts button[aria-pressed="true"]{background:#fff;box-shadow:0 0 0 2px var(--brand)}
+.opts .r{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex:none;background:#fff}
+.opts button[aria-pressed="true"] .r{border:6px solid var(--brand)}
+.rec{border-radius:24px;background:var(--tint);padding:clamp(24px,3vw,36px);display:flex;flex-direction:column}
+.rec .lab{font-size:14px;color:var(--muted);font-weight:500}
+.rec h3{font-size:clamp(1.5rem,1.2rem + 1vw,2rem);margin-top:6px}
+.rec p{margin-top:12px;max-width:52ch}
+.vis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px}
+.vis div{border-radius:12px;background:#fff;padding:12px;text-align:center;font-size:13px;color:var(--muted)}
+.vis i{display:block;height:8px;border-radius:4px;background:var(--line);margin:8px auto 0;width:70%;transition:background .4s}
+.vis .on i{background:var(--ok)}
+.vis .on{color:var(--ink);font-weight:600}
+.rec .foot{margin-top:auto;padding-top:24px;display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.rec .cost{font-size:2rem;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
+.rec .cost small{display:block;font-size:14px;font-weight:400;color:var(--muted);letter-spacing:0;margin-top:6px}
+.swap{animation:swap .45s var(--ease)}
+@keyframes swap{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+table{width:100%;border-collapse:collapse;margin-top:40px;font-size:16px}
+caption{text-align:left;font-weight:700;color:var(--ink);font-size:1.15rem;padding-bottom:12px}
+th,td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--line)}
+th{font-size:13px;color:var(--muted);font-weight:500}
+td:last-child,th:last-child{text-align:right;white-space:nowrap;font-weight:600;color:var(--ink)}
+tr.hl td{background:var(--brand-soft)}
+.tnote{font-size:14px;color:var(--muted);margin-top:14px}
+
+/* surgeon */
+.sur{background:var(--tint)}
+.sur .wrap{display:grid;grid-template-columns:auto 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+.sur .ph{width:clamp(220px,28vw,340px);aspect-ratio:1;border-radius:50%;background:linear-gradient(180deg,oklch(0.9 0.03 260),oklch(0.85 0.05 265));overflow:hidden;position:relative}
+.sur .ph img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:100%;width:auto;max-width:none;mix-blend-mode:multiply}
+.sur .role{color:var(--brand);font-weight:600;font-size:15px}
+.sur h2{margin-top:8px}
+.sur .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.sur .tags span{background:#fff;border-radius:999px;padding:8px 14px;font-size:15px;color:var(--ink);font-weight:500}
+.sur p{margin-top:20px;max-width:56ch}
+
+/* reviews */
+.rvs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.rv{border-radius:20px;overflow:hidden;position:relative;aspect-ratio:4/3;background:var(--tint);text-decoration:none;color:#fff;display:flex;align-items:end;padding:20px}
+.rv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.rv::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,oklch(0.2 0.06 265 / .85))}
+.rv span{position:relative;z-index:1}
+.rv b{display:block;font-size:1.1rem}
+.rv .pl{position:absolute;z-index:1;top:16px;left:16px;background:var(--brand);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600}
+.rv.txt{background:var(--navy);aspect-ratio:auto;flex-direction:column;align-items:start;justify-content:space-between;gap:20px}
+.rv.txt::after{display:none}
+.rv.txt p{font-size:1.15rem;line-height:1.45;position:relative;z-index:1}
+
+/* faq */
+.faq .wrap{display:grid;grid-template-columns:.75fr 1.25fr;gap:clamp(28px,5vw,72px)}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:20px 0;font-weight:600;font-size:1.1rem;color:var(--ink)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";width:12px;height:12px;flex:none;margin-top:6px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);rotate:45deg;transition:rotate .3s var(--ease)}
+details[open] summary::after{rotate:-135deg}
+details p{padding-bottom:20px;max-width:62ch}
+
+/* final */
+.final{background:var(--brand);color:#fff}
+.final .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center}
+.final h2{color:#fff}
+.final p{margin-top:14px;opacity:.9;max-width:44ch}
+.final form{background:#fff;border-radius:20px;padding:24px;margin:0;color:var(--body)}
+.final .btn-brand{box-shadow:none}
+
+footer{padding:32px 0 100px;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
+
+.bar{display:none}
+
+@media (max-width:1000px){
+  .tl{grid-template-columns:1fr;gap:0}
+  .tl::before{left:20px;right:auto;top:20px;bottom:20px;width:2px;height:auto}
+  .tl li{display:grid;grid-template-columns:42px 1fr;column-gap:18px;padding:0 0 24px}
+  .tl h3{margin-top:8px}
+  .tl p,.tl .t{grid-column:2}
+}
+@media (max-width:880px){
+  .hero .wrap,.symp .wrap,.picker,.faq .wrap,.final .wrap,.sur .wrap{grid-template-columns:1fr}
+  .lead-card{position:static}
+  .top .info span{display:none}
+  .top .btn{display:none}
+  .sur .ph{justify-self:center}
+  .bar{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:var(--z-sticky);padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:color-mix(in oklch,var(--bg) 94%,transparent);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .bar .btn{min-height:50px;padding:10px}
+}
+@media (max-width:520px){
+  .facts{grid-template-columns:repeat(2,auto)}
+  .facts li:last-child{grid-column:1/-1}
+  .vis{grid-template-columns:repeat(3,1fr)}
+  table{font-size:14px}
+  th,td{padding:12px 6px}
+  .top .info a{font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="https://prozrenie-clinic.ru/_nuxt/img/logo-eye.5ff75d0.png" alt=""><span>ПРОЗРЕНИЕ</span></a>
+    <div class="info"><a class="num" href="tel:+79896608788">+7 989 660-87-88</a><span>Пн–Сб 9–19, Вс 10–18</span></div>
+    <a class="btn btn-brand" href="#zapis">Записаться</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="crumb"><i aria-hidden="true">✓</i>23 700+ операций в Махачкале</span>
+      <h1>Удаление катаракты за <span>15&nbsp;минут</span>, без швов и уколов</h1>
+      <p class="lead">Заменим помутневший хрусталик на искусственную линзу через прокол 1,8 мм. Обезболивание каплями, вы видите только свет лампы.</p>
+      <ul class="facts">
+        <li><b class="num">23 года</b><span>стаж ведущего хирурга</span></li>
+        <li><b class="num">8 видов</b><span>линз Rayner, Alcon, Asqelio</span></li>
+        <li><b class="num">10–20 мин</b><span>длится операция</span></li>
+      </ul>
+      <div class="photo"><img src="https://prozrenie-clinic.ru/_nuxt/img/mtech-4.d072df2.png" alt="Хирург проводит операцию на глазу под микроскопом"></div>
+    </div>
+    <aside class="lead-card" id="zapis">
+      <div class="price"><b class="num">от 40 000 ₽</b><span>операция + линза</span></div>
+      <h2>Запишитесь на диагностику перед операцией</h2>
+      <ul><li>Осмотр и расчёт линзы под ваш глаз</li><li>Хирург объяснит, какая линза подойдёт</li><li>Без обязательств: решение принимаете вы</li></ul>
+      <form onsubmit="event.preventDefault();this.classList.add('sent')">
+        <input required placeholder="Ваше имя" autocomplete="given-name" aria-label="Имя">
+        <input required type="tel" placeholder="Телефон" autocomplete="tel" aria-label="Телефон">
+        <label class="agree"><input type="checkbox" required>Согласен с обработкой персональных данных</label>
+        <button class="btn btn-brand">Перезвоните мне</button>
+        <p class="small">Администратор позвонит в рабочее время</p>
+        <div class="ok">Спасибо! Это демо-форма, в рабочей версии заявка уйдёт администратору.</div>
+      </form>
+    </aside>
+  </div>
+</section>
+
+<section class="symp">
+  <div class="wrap">
+    <div>
+      <h2>Узнаёте эти признаки?</h2>
+      <p style="margin-top:16px;color:var(--muted);max-width:44ch">Катаракта развивается медленно, и к ухудшению привыкаешь. Отметьте, что замечаете вы или ваш близкий.</p>
+      <div class="verdict" id="verdict" aria-live="polite"><div><b>Отмечено: 0 из 6</b><p>Отметьте признаки слева</p></div><a class="btn" href="#zapis">Записаться</a></div>
+    </div>
+    <div class="checks" id="checks">
+      <label><input type="checkbox">Всё как будто в тумане или за мутным стеклом</label>
+      <label><input type="checkbox">Слепят фары встречных машин и яркий свет</label>
+      <label><input type="checkbox">Цвета стали тусклыми, с желтизной</label>
+      <label><input type="checkbox">Новые очки быстро перестают помогать</label>
+      <label><input type="checkbox">Двоится в одном глазу</label>
+      <label><input type="checkbox">Трудно читать даже при хорошем свете</label>
+    </div>
+  </div>
+</section>
+
+<section class="steps">
+  <div class="wrap">
+    <div class="sh"><h2>Как проходит операция</h2><p>Факоэмульсификация: ультразвук превращает мутный хрусталик в эмульсию, его удаляют и ставят линзу.</p></div>
+    <ol class="tl">
+      <li><span class="n">1</span><div><h3>Анестезия</h3><span class="t">капли</span></div><p>Без уколов. Чувствуете только свет лампы.</p></li>
+      <li><span class="n">2</span><div><h3>Микропрокол</h3><span class="t">1,8 мм</span></div><p>Хирург делает крошечный прокол роговицы.</p></li>
+      <li class="key"><span class="n">3</span><div><h3>Удаление</h3><span class="t">3–7 минут</span></div><p>Ультразвук дробит хрусталик, его аккуратно удаляют.</p></li>
+      <li><span class="n">4</span><div><h3>Ввод линзы</h3><span class="t">1–2 минуты</span></div><p>Сложенная линза вводится через инжектор.</p></li>
+      <li><span class="n">5</span><div><h3>Раскрытие</h3><span class="t">сама</span></div><p>Линза расправляется на месте хрусталика.</p></li>
+      <li><span class="n">6</span><div><h3>Фиксация</h3><span class="t">опорные элементы</span></div><p>Линза надёжно держится в капсуле.</p></li>
+      <li><span class="n">7</span><div><h3>Без швов</h3><span class="t">заживает сам</span></div><p>Прокол затягивается без швов.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="linzy">
+  <div class="wrap">
+    <div class="sh"><h2>Какая линза вам подойдёт?</h2><p>От линзы зависит, как вы будете видеть после операции и понадобятся ли очки. Выберите, что для вас важнее.</p></div>
+    <div class="picker">
+      <div class="opts" id="opts" role="group" aria-label="Что для вас важно">
+        <button aria-pressed="true" data-k="0"><span class="r"></span>Видеть вдаль, для чтения готов носить очки</button>
+        <button aria-pressed="false" data-k="1"><span class="r"></span>То же, но максимально чёткая и контрастная картинка</button>
+        <button aria-pressed="false" data-k="2"><span class="r"></span>У меня астигматизм</button>
+        <button aria-pressed="false" data-k="3"><span class="r"></span>Вдаль и на среднем: компьютер, машина</button>
+        <button aria-pressed="false" data-k="4"><span class="r"></span>Жить совсем без очков</button>
+        <button aria-pressed="false" data-k="5"><span class="r"></span>Без очков, и есть астигматизм</button>
+      </div>
+      <div class="rec" id="rec" aria-live="polite"></div>
+    </div>
+    <table>
+      <caption>Все цены: операция вместе с линзой</caption>
+      <thead><tr><th>Линза</th><th>Производитель</th><th>Цена</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <p class="tnote">Итоговый выбор линзы делает хирург после диагностики и расчёта (А-сканирование, 500 ₽). Цены по прайсу клиники.</p>
+  </div>
+</section>
+
+<section class="sur">
+  <div class="wrap">
+    <div class="ph"><img src="https://admin.prozrenie-clinic.ru/uploads/specialists_1_73589babb8.png" alt="Алиев Ахмед Абдул-Гамидович"></div>
+    <div>
+      <div class="role">Оперирует ведущий хирург</div>
+      <h2>Ахмед Абдул-Гамидович Алиев</h2>
+      <div class="tags"><span>Стаж 23 года</span><span>Кандидат медицинских наук</span><span>Врач высшей категории</span></div>
+      <p>Вместе с командой хирургов «Прозрения» провёл более 23 700 операций по удалению катаракты. К нам приезжают из Грозного, Назрани, Краснодара, Ростова-на-Дону и Москвы.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sh"><h2>Отзывы пациентов</h2><p>Видеоотзывы и отзывы с карт. Для запуска лендинга подберём отзывы именно об операции на катаракте.</p></div>
+    <div class="rvs">
+      <a class="rv" href="#"><img src="https://admin.prozrenie-clinic.ru/uploads/Otzyv_1_f2dfa7836b.png" alt=""><span class="pl">▶ Видео</span><span><b>Сапар Абакаров</b>отзыв пациента</span></a>
+      <a class="rv" href="#"><img src="https://admin.prozrenie-clinic.ru/uploads/m_reviews_1_80f743304a.png" alt=""><span class="pl">▶ Видео</span><span><b>Расул Исмаилов</b>отзыв пациента</span></a>
+      <div class="rv txt"><p>Место для отзыва пациента после операции на катаракте: с именем, возрастом и выбранной линзой.</p><span><b>Отзыв с 2ГИС</b>подставим реальный</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" style="padding-top:0">
+  <div class="wrap">
+    <h2>Вопросы перед операцией</h2>
+    <div>
+      <details open><summary>Это больно?</summary><p>Нет. Глаз обезболивают каплями, без уколов. Во время операции пациент видит только свет лампы.</p></details>
+      <details><summary>Сколько длится операция?</summary><p>Сама операция занимает 10–20 минут. Удаление хрусталика длится 3–7 минут, установка линзы 1–2 минуты.</p></details>
+      <details><summary>Нужно ли ждать, пока катаракта «созреет»?</summary><p>Современная факоэмульсификация не требует ждать «созревания». Операцию обычно делают, когда снижение зрения мешает жизни. Сроки определит хирург после осмотра.</p></details>
+      <details><summary>Будут ли швы?</summary><p>Нет. Прокол 1,8 мм заживает самостоятельно, швы не накладываются.</p></details>
+      <details><summary>Сколько стоит операция?</summary><p>От 40 000 ₽ со стандартной линзой Acrifold до 130 000 ₽ с трифокально-торической Alcon PanOptix Toric. В стоимость входит операция и линза.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <div>
+      <h2>Вернём ясность за одну операцию</h2>
+      <p>Оставьте номер. Администратор перезвонит, запишет на диагностику и расскажет, как подготовиться.</p>
+    </div>
+    <form onsubmit="event.preventDefault();this.classList.add('sent')">
+      <input required placeholder="Ваше имя" autocomplete="given-name" aria-label="Имя">
+      <input required type="tel" placeholder="Телефон" autocomplete="tel" aria-label="Телефон">
+      <label class="agree"><input type="checkbox" required>Согласен с обработкой персональных данных</label>
+      <button class="btn btn-brand">Записаться на диагностику</button>
+      <div class="ok">Спасибо! Это демо-форма.</div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>Глазная клиника «Прозрение» · Махачкала, пр. Имама Шамиля, 18д</span><span>Имеются противопоказания, необходима консультация специалиста</span></div></footer>
+
+<div class="bar"><a class="btn btn-line" href="tel:+79896608788">Позвонить</a><a class="btn btn-brand" href="#zapis">Записаться</a></div>
+
+<script>
+// symptoms
+const checks=[...document.querySelectorAll('#checks input')],ver=document.getElementById('verdict');
+checks.forEach(c=>c.addEventListener('change',()=>{const n=checks.filter(x=>x.checked).length;
+ const t=n===0?'Отметьте признаки слева':n<=2?'Стоит проверить зрение у офтальмолога':'Похоже на катаракту. Не откладывайте диагностику';
+ ver.querySelector('div').innerHTML=`<b>Отмечено: ${n} из 6</b><p>${t}</p>`}));
+
+// lenses
+const L=[
+ {n:'Стандартная',m:'Acrifold',p:40000},
+ {n:'Асферическая',m:'Rayner, Asqelio',p:50000},
+ {n:'Торическая',m:'Rayner, Asqelio',p:65000},
+ {n:'EDOF',m:'Rayner',p:65000},
+ {n:'Трифокальная',m:'Rayner',p:90000},
+ {n:'Трифокальная',m:'Alcon PanOptix',p:110000},
+ {n:'Трифокально-торическая',m:'Rayner',p:110000},
+ {n:'Трифокально-торическая',m:'Alcon PanOptix Toric',p:130000}];
+const R=[
+ {h:'Монофокальная линза',d:'Чёткое зрение вдаль. Для чтения и телефона понадобятся очки. Надёжный и самый доступный вариант.',v:[1,0,0],ids:[0],from:40000},
+ {h:'Асферическая линза',d:'Тоже фокус вдаль, но лучше контраст и меньше бликов, особенно в сумерках и за рулём.',v:[1,0,0],ids:[1],from:50000},
+ {h:'Торическая линза',d:'Исправляет и катаракту, и астигматизм: без неё картинка оставалась бы немного размытой.',v:[1,0,0],ids:[2],from:65000},
+ {h:'EDOF-линза',d:'Расширенный фокус: вдаль и на среднем расстоянии (экран, приборная панель) без очков.',v:[1,1,0],ids:[3],from:65000},
+ {h:'Трифокальная линза',d:'Три фокуса: вдаль, на среднем и вблизи. Большинству пациентов очки больше не нужны.',v:[1,1,1],ids:[4,5],from:90000},
+ {h:'Трифокально-торическая',d:'Три фокуса плюс коррекция астигматизма. Максимальная независимость от очков.',v:[1,1,1],ids:[6,7],from:110000}];
+const fmt=n=>n.toLocaleString('ru-RU')+' ₽',rec=document.getElementById('rec'),tb=document.getElementById('tbody');
+function pick(k){const r=R[k];
+ rec.innerHTML=`<div class="swap" style="display:contents"><span class="lab">Вам может подойти</span><h3>${r.h}</h3><p>${r.d}</p>
+ <div class="vis">${['Вдаль','Компьютер','Чтение'].map((x,i)=>`<div class="${r.v[i]?'on':''}">${x}<i></i></div>`).join('')}</div>
+ <div class="foot"><div class="cost num">от ${fmt(r.from)}<small>операция + линза</small></div><a class="btn btn-brand" href="#zapis">Обсудить с хирургом</a></div></div>`;
+ tb.innerHTML=L.map((l,i)=>`<tr class="${r.ids.includes(i)?'hl':''}"><td>${l.n}</td><td>${l.m}</td><td class="num">${fmt(l.p)}</td></tr>`).join('');}
+document.querySelectorAll('#opts button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('#opts button').forEach(x=>x.setAttribute('aria-pressed',x===b));pick(+b.dataset.k)}));
+pick(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Прозрение — глазная клиника в Махачкале · Вариант 2 «Забота»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: oklch(0.985 0.005 200);
+  --mist: oklch(0.95 0.022 200);
+  --mist-2: oklch(0.91 0.035 200);
+  --teal: oklch(0.40 0.075 210);
+  --teal-deep: oklch(0.31 0.06 215);
+  --ink: oklch(0.25 0.035 220);
+  --body: oklch(0.33 0.03 220);
+  --muted: oklch(0.45 0.03 215);
+  --line: oklch(0.88 0.02 205);
+  --warm: oklch(0.56 0.15 38);
+  --warm-hover: oklch(0.51 0.15 36);
+  --warm-soft: oklch(0.93 0.04 45);
+  --on-teal: oklch(0.98 0.01 200);
+  --on-teal-muted: oklch(0.86 0.03 200);
+  --ease: cubic-bezier(.22,1,.36,1);
+  --wrap: min(1200px, 100% - 2*clamp(16px, 4vw, 40px));
+  --z-sticky: 10;
+  font-size: 100%;
+}
+:root[data-size="l"]{font-size:112.5%}
+:root[data-size="xl"]{font-size:125%}
+:root[data-contrast="hi"]{--bg:#fff;--mist:#fff;--mist-2:#eee;--ink:#000;--body:#000;--muted:#111;--line:#000;--teal:#000;--teal-deep:#000;--warm:#000;--warm-hover:#222;--warm-soft:#fff}
+:root[data-contrast="hi"] img{filter:grayscale(1)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"Golos Text",system-ui,sans-serif;background:var(--bg);color:var(--body);font-size:1.125rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:var(--wrap);margin-inline:auto}
+h1,h2,h3{font-family:"Nunito",sans-serif;color:var(--ink);line-height:1.1;letter-spacing:-0.015em;text-wrap:balance}
+h1{font-weight:900;font-size:clamp(2.5rem,1.6rem + 3.6vw,4.6rem)}
+h2{font-weight:800;font-size:clamp(2rem,1.4rem + 2.2vw,3.2rem)}
+h3{font-weight:800;font-size:1.35rem;line-height:1.25}
+p{text-wrap:pretty}
+:focus-visible{outline:3px solid var(--warm);outline-offset:3px;border-radius:8px}
+
+/* a11y bar */
+.a11y{background:var(--teal-deep);color:var(--on-teal);font-size:.9rem}
+.a11y .wrap{display:flex;align-items:center;gap:20px;min-height:44px;flex-wrap:wrap}
+.a11y .grp{display:flex;align-items:center;gap:6px}
+.a11y button{font:inherit;color:inherit;background:transparent;border:1px solid color-mix(in oklch,var(--on-teal) 30%,transparent);border-radius:8px;min-width:36px;height:32px;padding:0 10px;cursor:pointer;font-weight:600}
+.a11y button[aria-pressed="true"]{background:var(--on-teal);color:var(--teal-deep)}
+.a11y .s{font-size:.85rem}.a11y .m{font-size:1rem}.a11y .x{font-size:1.15rem}
+.a11y .right{margin-left:auto;display:flex;gap:18px;color:var(--on-teal-muted)}
+.a11y .right a{text-decoration:none;color:var(--on-teal);font-weight:600}
+
+header.top{position:sticky;top:0;z-index:var(--z-sticky);background:color-mix(in oklch,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:28px;height:76px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:Nunito;font-weight:900;font-size:1.25rem;color:var(--teal-deep);letter-spacing:.01em}
+.logo img{width:40px;height:40px;object-fit:contain}
+.nav{display:flex;gap:24px;margin-left:auto;font-weight:500;font-size:1rem}
+.nav a{text-decoration:none;color:var(--body)}
+.nav a:hover{color:var(--warm)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-weight:600;font-size:1.05rem;border:0;border-radius:16px;padding:16px 26px;min-height:56px;cursor:pointer;text-decoration:none;transition:background .2s,transform .3s var(--ease)}
+.btn:active{transform:scale(.98)}
+.btn-warm{background:var(--warm);color:#fff}
+.btn-warm:hover{background:var(--warm-hover)}
+.btn-soft{background:var(--mist);color:var(--teal-deep)}
+.btn-soft:hover{background:var(--mist-2)}
+
+/* hero */
+.hero{padding-block:clamp(40px,6vw,88px) clamp(56px,7vw,104px)}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center}
+.hero .lead{font-size:clamp(1.15rem,1.05rem + .4vw,1.35rem);margin-top:24px;max-width:36ch}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+.hero .note{display:flex;gap:12px;align-items:center;margin-top:28px;font-size:1rem;color:var(--muted)}
+.hero .note b{color:var(--ink);font-weight:600}
+.dot{width:10px;height:10px;border-radius:50%;background:oklch(0.65 0.15 150);box-shadow:0 0 0 5px oklch(0.65 0.15 150 / .18);flex:none}
+.collage{position:relative;aspect-ratio:1/1.02}
+.collage .big{position:absolute;inset:0 0 12% 10%;border-radius:40px 40px 40px 120px;overflow:hidden;background:var(--mist)}
+.collage .big img{width:100%;height:100%;object-fit:cover}
+.collage .doc{position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:14px;background:#fff;border-radius:999px;padding:8px 22px 8px 8px;box-shadow:0 18px 40px -18px oklch(0.3 0.05 215 / .35)}
+.collage .doc img{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:top;background:var(--mist)}
+.collage .doc b{display:block;font-family:Nunito;font-weight:800;color:var(--ink);font-size:1.05rem;line-height:1.2}
+.collage .doc span{font-size:.9rem;color:var(--muted)}
+.collage .sun{position:absolute;right:-4%;top:-4%;width:120px;height:120px;border-radius:50%;background:var(--warm-soft);display:grid;place-items:center;text-align:center;font-family:Nunito;font-weight:900;color:var(--warm);line-height:1;font-size:2rem;rotate:-8deg}
+.collage .sun small{display:block;font-size:.8rem;font-weight:700;margin-top:4px}
+
+section{padding-block:clamp(64px,8vw,120px)}
+.sec-head{max-width:760px;margin-bottom:clamp(32px,4vw,52px)}
+.sec-head p{margin-top:16px;color:var(--muted);max-width:58ch}
+
+/* symptom chooser */
+.chooser{background:var(--mist)}
+.ch{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;align-items:start}
+.ch-list{display:grid;gap:10px}
+.ch-list button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:20px;background:var(--bg);color:var(--ink);font-weight:500;font-size:1.1rem;transition:background .2s,box-shadow .2s,transform .3s var(--ease)}
+.ch-list button:hover{transform:translateX(4px)}
+.ch-list button:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+.ch-list button[aria-selected="true"]{background:var(--teal);color:var(--on-teal)}
+.ch-list .em{font-size:1.4rem;width:44px;height:44px;border-radius:14px;background:var(--mist);display:grid;place-items:center;flex:none}
+.ch-list button[aria-selected="true"] .em{background:color-mix(in oklch,var(--on-teal) 18%,transparent)}
+.ch-panel{background:var(--bg);border-radius:28px;padding:clamp(24px,3vw,40px);position:sticky;top:110px}
+.ch-panel .tag{display:inline-block;background:var(--warm-soft);color:var(--warm-hover);font-weight:600;font-size:.9rem;padding:6px 14px;border-radius:999px}
+.ch-panel h3{font-size:clamp(1.6rem,1.3rem + 1vw,2.2rem);margin-top:16px}
+.ch-panel p{margin-top:14px}
+.ch-panel ul{margin:18px 0 0;padding-left:1.2em;display:grid;gap:6px}
+.ch-panel .foot{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-top:28px;padding-top:22px;border-top:1px dashed var(--line)}
+.ch-panel .price{font-family:Nunito;font-weight:800;font-size:1.5rem;color:var(--ink)}
+.ch-panel .price small{display:block;font-family:"Golos Text";font-weight:400;font-size:.9rem;color:var(--muted)}
+.swap{animation:swap .5s var(--ease)}
+@keyframes swap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* sivtsev test */
+.test{background:var(--teal-deep);color:var(--on-teal)}
+.test h2{color:var(--on-teal)}
+.test .sec-head p{color:var(--on-teal-muted)}
+.test .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center}
+.chart{background:#fff;border-radius:28px;padding:28px 20px;display:grid;gap:4px;color:#111;font-family:"Golos Text";font-weight:600}
+.chart button{all:unset;cursor:pointer;display:grid;grid-template-columns:1fr 64px;align-items:center;border-radius:12px;padding:6px 12px;transition:background .2s}
+.chart button:hover,.chart button:focus-visible{background:oklch(0.95 0.02 200)}
+.chart button[aria-pressed="true"]{background:var(--warm-soft)}
+.chart .l{letter-spacing:.35em;text-align:center;line-height:1.1}
+.chart .v{font-size:12px;font-weight:500;color:#666;text-align:right;letter-spacing:0}
+.test ol{padding-left:1.2em;display:grid;gap:10px;color:var(--on-teal-muted);margin-top:24px}
+.result{margin-top:28px;border-radius:20px;background:color-mix(in oklch,var(--on-teal) 10%,transparent);padding:22px 24px;min-height:120px}
+.result b{display:block;font-family:Nunito;font-weight:800;font-size:1.3rem;color:var(--on-teal)}
+.result p{margin-top:6px;color:var(--on-teal-muted)}
+.result a{color:var(--on-teal);font-weight:600}
+.disc{font-size:.85rem;color:var(--on-teal-muted);margin-top:14px}
+
+/* journey */
+.journey ol{list-style:none;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;counter-reset:j}
+.journey li{position:relative;padding:26px 22px 28px;border-radius:24px;background:var(--mist)}
+.journey li:nth-child(3){background:var(--warm-soft)}
+.journey .n{font-family:Nunito;font-weight:900;font-size:2.4rem;color:var(--teal);line-height:1}
+.journey li:nth-child(3) .n{color:var(--warm)}
+.journey h3{margin-top:14px;font-size:1.2rem}
+.journey p{margin-top:8px;font-size:1rem;color:var(--muted)}
+.journey .quote{margin-top:28px;display:flex;gap:16px;align-items:center;font-size:1.1rem;color:var(--ink);max-width:70ch}
+.journey .quote b{white-space:nowrap;font-family:Nunito;font-weight:900;font-size:2.4rem;color:var(--warm);line-height:1}
+
+/* doctors */
+.docs{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.doc-card{text-align:center}
+.doc-card .ph{aspect-ratio:1;border-radius:50%;background:var(--mist);overflow:hidden;position:relative;transition:background .4s}
+.doc-card:hover .ph{background:var(--warm-soft)}
+.doc-card .ph img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:100%;width:auto;max-width:none;mix-blend-mode:multiply;transition:transform .6s var(--ease)}
+.doc-card:hover .ph img{transform:translateX(-50%) scale(1.04)}
+.doc-card h3{margin-top:18px;font-size:1.15rem}
+.doc-card p{font-size:.95rem;color:var(--muted);margin-top:4px}
+.doc-card a{display:inline-block;margin-top:12px;font-weight:600;color:var(--warm);text-decoration:none;font-size:1rem}
+.doc-card a:hover{text-decoration:underline}
+
+/* reviews */
+.revs{background:var(--mist)}
+.revs .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rv{background:var(--bg);border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:18px}
+.rv .face{display:flex;gap:14px;align-items:center}
+.rv .face img{width:64px;height:64px;border-radius:50%;object-fit:cover}
+.rv .face b{display:block;font-family:Nunito;font-weight:800;color:var(--ink)}
+.rv .face span{font-size:.9rem;color:var(--muted)}
+.rv p{font-size:1.05rem}
+.rv .play{margin-top:auto;align-self:start;display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--teal);text-decoration:none}
+.rv .play i{width:36px;height:36px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-style:normal;font-size:.8rem}
+
+/* faq */
+.faq .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,5vw,72px)}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:22px 0;font-family:Nunito;font-weight:800;font-size:1.2rem;color:var(--ink)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;width:32px;height:32px;border-radius:50%;background:var(--mist);display:grid;place-items:center;font-size:1.2rem;transition:rotate .3s var(--ease)}
+details[open] summary::after{rotate:45deg;background:var(--warm-soft)}
+details p{padding-bottom:22px;max-width:62ch}
+
+/* contact */
+.contact{background:var(--teal-deep);color:var(--on-teal)}
+.contact h2{color:var(--on-teal)}
+.contact .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,72px)}
+.who{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+.who label{cursor:pointer}
+.who input{position:absolute;opacity:0}
+.who span{display:inline-block;padding:12px 20px;border-radius:999px;border:1px solid color-mix(in oklch,var(--on-teal) 35%,transparent);font-weight:500;transition:background .2s}
+.who input:checked+span{background:var(--on-teal);color:var(--teal-deep);border-color:var(--on-teal)}
+.who input:focus-visible+span{outline:3px solid var(--warm);outline-offset:2px}
+form{display:grid;gap:14px;margin-top:22px;max-width:560px}
+.fld{display:grid;gap:6px;font-size:.95rem;color:var(--on-teal-muted)}
+.fld input{font:inherit;font-size:1.1rem;color:var(--ink);background:#fff;border:0;border-radius:16px;padding:16px 18px;min-height:56px}
+.fld input::placeholder{color:oklch(0.5 0.02 215)}
+.agree{display:flex;gap:10px;font-size:.9rem;color:var(--on-teal-muted)}
+.agree input{width:20px;height:20px;accent-color:var(--warm);margin-top:2px;flex:none}
+.ok{display:none;padding:18px;border-radius:16px;background:var(--on-teal);color:var(--teal-deep)}
+form.sent .ok{display:block}
+.place{border-radius:32px;overflow:hidden;background:var(--teal)}
+.place img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 35%}
+.place dl{padding:24px 28px;display:grid;gap:14px}
+.place dt{font-size:.9rem;color:var(--on-teal-muted)}
+.place dd{margin:2px 0 0;font-weight:600;font-size:1.1rem}
+.place dd a{text-decoration:none}
+
+footer{padding-block:40px;font-size:.95rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between}
+
+@media (max-width:1060px){
+  .nav{display:none}
+  .top .btn{margin-left:auto}
+  .journey ol{grid-template-columns:repeat(2,1fr)}
+  .journey li:nth-child(5){grid-column:span 2}
+  .docs{grid-template-columns:repeat(2,1fr);gap:32px 20px}
+}
+@media (max-width:860px){
+  .hero .wrap,.ch,.test .wrap,.faq .wrap,.contact .wrap{grid-template-columns:1fr}
+  .revs .grid{grid-template-columns:1fr}
+  .ch-panel{position:static;scroll-margin-top:90px}
+  .collage{max-width:520px;width:100%;justify-self:center}
+  .a11y .right{display:none}
+}
+@media (max-width:520px){
+  .top .btn{padding:12px 16px;min-height:44px;font-size:.95rem}
+  .logo span{display:none}
+  .journey ol{grid-template-columns:1fr}
+  .journey li:nth-child(5){grid-column:auto}
+  .collage .sun{width:96px;height:96px;font-size:1.6rem;right:0}
+  .collage .doc{padding-right:16px}
+  .hero .ctas .btn{flex:1 1 100%}
+  .chart .l{letter-spacing:.2em}
+  .a11y .wrap{gap:10px;flex-wrap:nowrap}
+  .a11y .lbl{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="a11y" role="region" aria-label="Настройки для слабовидящих">
+  <div class="wrap">
+    <div class="grp" role="group" aria-label="Размер текста">
+      <span class="lbl">Текст:</span>
+      <button class="s" data-size="" aria-pressed="true" aria-label="Обычный размер">А</button>
+      <button class="m" data-size="l" aria-pressed="false" aria-label="Крупный">А+</button>
+      <button class="x" data-size="xl" aria-pressed="false" aria-label="Очень крупный">А++</button>
+    </div>
+    <div class="grp"><button id="contrast" aria-pressed="false">Контраст<span class="lbl">&nbsp;высокий</span></button></div>
+    <div class="right"><span>Пн–Сб 9–19, Вс 10–18</span><a href="tel:+79896608788">+7 989 660-87-88</a></div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#"><img src="https://prozrenie-clinic.ru/_nuxt/img/logo-eye.5ff75d0.png" alt=""><span>Прозрение</span></a>
+    <nav class="nav" aria-label="Основное меню"><a href="#s-chem">С чем приходят</a><a href="#proverka">Проверка зрения</a><a href="#vrachi">Врачи</a><a href="#voprosy">Вопросы</a><a href="#zapis">Контакты</a></nav>
+    <a class="btn btn-warm" href="#zapis">Записаться</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Бережно о глазах всей семьи</h1>
+      <p class="lead">От первого осмотра ребёнка до операции на катаракте у бабушки. Объясняем простыми словами, не торопим с решением и ведём до результата.</p>
+      <div class="ctas">
+        <a class="btn btn-warm" href="#zapis">Записаться на приём</a>
+        <a class="btn btn-soft" href="tel:+79896608788">Позвонить в клинику</a>
+      </div>
+      <p class="note"><span class="dot" aria-hidden="true"></span><span>Центр Махачкалы, <b>проспект Имама Шамиля, 18д</b></span></p>
+    </div>
+    <div class="collage">
+      <div class="big"><img src="https://admin.prozrenie-clinic.ru/uploads/p_services_4_0d5009d2be.png" alt="Ребёнок на приёме у офтальмолога в пробной оправе"></div>
+      <div class="sun" aria-hidden="true">10<small>лет рядом</small></div>
+      <div class="doc"><img src="https://admin.prozrenie-clinic.ru/uploads/specialists_4_adbb2f0c17.png" alt=""><div><b>Аминат Казиева</b><span>офтальмолог, 7 лет стажа</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="chooser" id="s-chem">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Расскажите, что беспокоит</h2>
+      <p>Не обязательно знать название диагноза. Выберите, что чувствуете вы или ваш близкий, и мы подскажем, с чего начать.</p>
+    </div>
+    <div class="ch">
+      <div class="ch-list" role="tablist" aria-label="Симптомы">
+        <button role="tab" aria-selected="true" data-i="0"><span class="em" aria-hidden="true">🌫️</span>Всё как в тумане, мутная пелена</button>
+        <button role="tab" aria-selected="false" data-i="1"><span class="em" aria-hidden="true">👓</span>Плохо вижу вдаль, устал от очков</button>
+        <button role="tab" aria-selected="false" data-i="2"><span class="em" aria-hidden="true">🧒</span>Ребёнок щурится или косит</button>
+        <button role="tab" aria-selected="false" data-i="3"><span class="em" aria-hidden="true">📖</span>После 40 трудно читать вблизи</button>
+        <button role="tab" aria-selected="false" data-i="4"><span class="em" aria-hidden="true">✨</span>Мушки, вспышки, «шторка»</button>
+        <button role="tab" aria-selected="false" data-i="5"><span class="em" aria-hidden="true">🩺</span>Давно не проверял зрение</button>
+      </div>
+      <div class="ch-panel" role="tabpanel" aria-live="polite" id="panel"></div>
+    </div>
+  </div>
+</section>
+
+<section class="test" id="proverka">
+  <div class="wrap">
+    <div>
+      <div class="sec-head" style="margin-bottom:0">
+        <h2>Проверьте зрение за минуту</h2>
+        <p>Та самая таблица Сивцева, только на экране. Это не диагноз, а повод задуматься.</p>
+      </div>
+      <ol>
+        <li>Сядьте на расстоянии вытянутой руки от экрана.</li>
+        <li>Прикройте ладонью один глаз, очки не снимайте.</li>
+        <li>Нажмите на последнюю строку, которую читаете уверенно.</li>
+      </ol>
+      <div class="result" id="result" aria-live="polite"><b>Выберите строку в таблице</b><p>Результат появится здесь.</p></div>
+      <p class="disc">Проверка у экрана не заменяет осмотр: яркость, размер дисплея и расстояние влияют на результат.</p>
+    </div>
+    <div class="chart" role="group" aria-label="Таблица для проверки зрения" id="chart"></div>
+  </div>
+</section>
+
+<section class="journey">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Операция на катаракте: как всё пройдёт</h2>
+      <p>Для тех, кто записывает маму или папу и волнуется больше них самих.</p>
+    </div>
+    <ol>
+      <li><span class="n">1</span><h3>Диагностика</h3><p>Осматриваем глаз и рассчитываем линзу именно под него.</p></li>
+      <li><span class="n">2</span><h3>Капли вместо укола</h3><p>Анестезия каплями. Пациент видит только свет лампы.</p></li>
+      <li><span class="n">3</span><h3>10–20 минут</h3><p>Мутный хрусталик удаляют через прокол 1,8 мм и ставят линзу.</p></li>
+      <li><span class="n">4</span><h3>Без швов</h3><p>Микропрокол заживает сам, повязку снимают быстро.</p></li>
+      <li><span class="n">5</span><h3>Контроль</h3><p>Врач осматривает глаз и объясняет, как беречь его первые недели.</p></li>
+    </ol>
+    <p class="quote"><b>23 700</b><span>операций по удалению катаракты уже провели хирурги «Прозрения». Ваш близкий будет в опытных руках.</span></p>
+  </div>
+</section>
+
+<section id="vrachi" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Врачи, к которым возвращаются семьями</h2>
+    </div>
+    <div class="docs">
+      <div class="doc-card"><div class="ph"><img src="https://admin.prozrenie-clinic.ru/uploads/specialists_1_73589babb8.png" alt="Алиев Ахмед Абдул-Гамидович"></div><h3>Алиев Ахмед Абдул-Гамидович</h3><p>Офтальмохирург, к.м.н., высшая категория, 23 года стажа</p><a href="#zapis">Записаться →</a></div>
+      <div class="doc-card"><div class="ph"><img src="https://admin.prozrenie-clinic.ru/uploads/specialists_2_8083299bf6.png" alt="Нурудинов Муса Муртазалиевич"></div><h3>Нурудинов Муса Муртазалиевич</h3><p>Офтальмохирург</p><a href="#zapis">Записаться →</a></div>
+      <div class="doc-card"><div class="ph"><img src="https://admin.prozrenie-clinic.ru/uploads/specialists_3_5dfbb10d2c.png" alt="Абдулаев Алигаджи Бадрудинович"></div><h3>Абдулаев Алигаджи Бадрудинович</h3><p>Офтальмохирург</p><a href="#zapis">Записаться →</a></div>
+      <div class="doc-card"><div class="ph"><img src="https://admin.prozrenie-clinic.ru/uploads/specialists_4_adbb2f0c17.png" alt="Казиева Аминат Гаджиявовна"></div><h3>Казиева Аминат Гаджиявовна</h3><p>Офтальмолог, 7 лет стажа</p><a href="#zapis">Записаться →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="revs">
+  <div class="wrap">
+    <div class="sec-head"><h2>Пациенты о «Прозрении»</h2><p>Приезжают из Грозного, Назрани, Краснодара, Ростова-на-Дону и Москвы.</p></div>
+    <div class="grid">
+      <div class="rv"><div class="face"><img src="https://admin.prozrenie-clinic.ru/uploads/Otzyv_1_f2dfa7836b.png" alt=""><div><b>Сапар Абакаров</b><span>лазерная коррекция</span></div></div><p>Здесь будет короткая расшифровка видеоотзыва: что беспокоило и как сейчас.</p><a class="play" href="#"><i aria-hidden="true">▶</i>Смотреть видео</a></div>
+      <div class="rv"><div class="face"><img src="https://admin.prozrenie-clinic.ru/uploads/m_reviews_1_80f743304a.png" alt=""><div><b>Расул Исмаилов</b><span>коррекция зрения</span></div></div><p>Здесь будет короткая расшифровка видеоотзыва: что беспокоило и как сейчас.</p><a class="play" href="#"><i aria-hidden="true">▶</i>Смотреть видео</a></div>
+      <div class="rv"><div class="face"><img src="https://prozrenie-clinic.ru/_nuxt/img/m_about-1.4be447d.jpg" alt="" style="object-position:center 40%"><div><b>Отзывы на картах</b><span>2ГИС · Яндекс Карты</span></div></div><p>Подтянем свежие отзывы с карт, чтобы рейтинг клиники был виден прямо на сайте.</p><a class="play" href="#"><i aria-hidden="true">→</i>Все отзывы</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="voprosy">
+  <div class="wrap">
+    <div class="sec-head"><h2>Частые вопросы</h2><p>Не нашли ответ? Позвоните, администратор подскажет: <a href="tel:+79896608788"><b>+7 989 660-87-88</b></a></p></div>
+    <div>
+      <details open><summary>Больно ли делать операцию?</summary><p>Нет. Перед операцией глаз обезболивают каплями, без уколов. Во время операции пациент чувствует лёгкое прикосновение и видит только свет лампы.</p></details>
+      <details><summary>Нужно ли ждать, пока катаракта «созреет»?</summary><p>Современная факоэмульсификация не требует ждать «созревания»: операцию обычно делают, когда снижение зрения начинает мешать жизни. Точные сроки определит врач после осмотра.</p></details>
+      <details><summary>С какого возраста проверять зрение ребёнку?</summary><p>Плановые осмотры у офтальмолога проходят в первые месяцы жизни, в год и перед школой. Если ребёнок щурится, косит или близко подносит книги, приходите раньше.</p></details>
+      <details><summary>Что взять с собой на приём?</summary><p>Паспорт, очки или линзы, которые вы носите, и выписки от других врачей, если они есть. Перед диагностикой для лазерной коррекции контактные линзы снимают заранее, администратор расскажет за сколько дней.</p></details>
+      <details><summary>Сколько стоит лечение?</summary><p>Диагностика от 3 000 ₽, лазерная коррекция SUPER LASIK 40 000 ₽, операция на катаракте с линзой от 40 000 ₽. Точную стоимость назовёт врач после осмотра.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="zapis">
+  <div class="wrap">
+    <div>
+      <h2>Запишитесь, мы перезвоним</h2>
+      <p style="margin-top:14px;color:var(--on-teal-muted);max-width:44ch">Можно записать не только себя. Администратор спросит, что беспокоит, и подберёт врача и удобное время.</p>
+      <form onsubmit="event.preventDefault();this.classList.add('sent')">
+        <div class="who" role="radiogroup" aria-label="Кого записываем">
+          <label><input type="radio" name="who" checked><span>Себя</span></label>
+          <label><input type="radio" name="who"><span>Ребёнка</span></label>
+          <label><input type="radio" name="who"><span>Маму или папу</span></label>
+        </div>
+        <label class="fld">Ваше имя<input required placeholder="Например, Патимат" autocomplete="given-name"></label>
+        <label class="fld">Телефон<input required type="tel" placeholder="+7 ___ ___-__-__" autocomplete="tel"></label>
+        <label class="agree"><input type="checkbox" required>Согласен с обработкой персональных данных</label>
+        <button class="btn btn-warm" style="justify-self:start">Жду звонка</button>
+        <div class="ok">Спасибо! Это демо-форма: в рабочей версии заявка уйдёт администратору.</div>
+      </form>
+    </div>
+    <div class="place">
+      <img src="https://prozrenie-clinic.ru/_nuxt/img/m_about-1.4be447d.jpg" alt="Здание клиники «Прозрение» с синей вывеской">
+      <dl>
+        <div><dt>Адрес</dt><dd>Махачкала, проспект Имама Шамиля, 18д</dd></div>
+        <div><dt>Часы работы</dt><dd>Пн–Сб 9:00–19:00, Вс 10:00–18:00</dd></div>
+        <div><dt>Телефон</dt><dd><a href="tel:+79896608788">+7 989 660-87-88</a></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© Глазная клиника «Прозрение», Махачкала</span><span>Имеются противопоказания, необходима консультация специалиста</span></div></footer>
+
+<script>
+// a11y controls
+const root=document.documentElement;
+document.querySelectorAll('[data-size]').forEach(b=>b.addEventListener('click',()=>{
+  root.dataset.size=b.dataset.size;
+  document.querySelectorAll('[data-size]').forEach(x=>x.setAttribute('aria-pressed',x===b));
+}));
+const c=document.getElementById('contrast');
+c.addEventListener('click',()=>{const on=c.getAttribute('aria-pressed')!=='true';c.setAttribute('aria-pressed',on);on?root.dataset.contrast='hi':delete root.dataset.contrast});
+
+// symptom chooser
+const S=[
+ {tag:'Похоже на катаракту',h:'Помутнение хрусталика',p:'Пелена, блики от фар, тусклые цвета, частая смена очков — типичные признаки катаракты. Она не лечится каплями, но хорошо лечится операцией.',li:['Диагностика и расчёт линзы','Операция 10–20 минут, без швов','Линзы от стандартной до трифокальной'],price:'от 40 000 ₽',ps:'операция вместе с линзой',href:'v3-katarakta.html',cta:'Подробнее о лечении'},
+ {tag:'Близорукость, астигматизм',h:'Лазерная коррекция зрения',p:'Если зрение стабильно и роговица подходит по толщине, очки можно снять за одну процедуру. Сначала — диагностика, она покажет, подходит ли вам коррекция.',li:['Комплексная диагностика ≈ 60 минут','Сама процедура 10–15 минут','Со второго дня — обычная жизнь'],price:'40 000 ₽',ps:'SUPER LASIK',href:'#zapis',cta:'Записаться на диагностику'},
+ {tag:'Детский приём',h:'Детская офтальмология',p:'Прищуривание и косоглазие часто связаны с амблиопией («ленивым глазом»). Чем раньше начать лечение, тем лучше результат.',li:['Осмотр и подбор лечения','Аппаратные курсы: плеоптика, синоптофор, Амблиокор','Занятия в игровой форме'],price:'от 1 500 ₽',ps:'курс из 10 процедур',href:'#zapis',cta:'Записать ребёнка'},
+ {tag:'Пресбиопия',h:'Возрастная дальнозоркость',p:'После 40 хрусталик теряет эластичность, и текст приходится отодвигать. Это нормально, и это поправимо: очками, а в ряде случаев — заменой хрусталика на мультифокальную линзу.',li:['Проверка остроты зрения вблизи и вдаль','Подбор решения под ваш образ жизни'],price:'от 3 000 ₽',ps:'диагностика',href:'#zapis',cta:'Записаться'},
+ {tag:'Не откладывайте',h:'Возможны проблемы с сетчаткой',p:'Вспышки, плавающие пятна и «шторка» могут быть признаками отслойки или дистрофии сетчатки. Это повод прийти на осмотр в ближайшие дни.',li:['ОКТ сетчатки','Осмотр глазного дна','Лазерная коагуляция при необходимости'],price:'от 2 000 ₽',ps:'приём специалиста по сетчатке',href:'tel:+79896608788',cta:'Позвонить сейчас'},
+ {tag:'Профилактика',h:'Плановая проверка зрения',p:'Раз в год стоит проверять глаза каждому, а после 40 — обязательно измерять давление внутри глаза. Многие болезни глаз долго протекают незаметно.',li:['Острота зрения и рефракция','Внутриглазное давление','Осмотр глазного дна'],price:'3 000 ₽',ps:'стандартная диагностика',href:'#zapis',cta:'Записаться'}
+];
+const panel=document.getElementById('panel');
+function show(i){const d=S[i];panel.innerHTML=`<div class="swap"><span class="tag">${d.tag}</span><h3>${d.h}</h3><p>${d.p}</p><ul>${d.li.map(x=>`<li>${x}</li>`).join('')}</ul><div class="foot"><div class="price">${d.price}<small>${d.ps}</small></div><a class="btn btn-warm" href="${d.href}">${d.cta}</a></div></div>`}
+document.querySelectorAll('.ch-list button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.ch-list button').forEach(x=>x.setAttribute('aria-selected',x===b));show(+b.dataset.i);
+  if(innerWidth<860)panel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'})}));
+show(0);
+
+// sivtsev chart
+const rows=[['Ш Б',0.1,64],['М Н К',0.2,46],['Ы М Б Ш',0.3,36],['Б Ы Н К М',0.4,28],['И Н Ш М К',0.5,22],['Н К И Б М Ш',0.7,17],['Ш И Н Б К Ы',0.8,14],['К Н Ш М Ы Б И',1.0,11]];
+const chart=document.getElementById('chart'),res=document.getElementById('result');
+rows.forEach(([t,v,s],i)=>{const b=document.createElement('button');b.setAttribute('aria-pressed','false');b.innerHTML=`<span class="l" style="font-size:${s}px">${t}</span><span class="v">V = ${v.toFixed(1)}</span>`;
+ b.addEventListener('click',()=>{chart.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  const m=i<=2?['Стоит показаться врачу','Если вы в очках и читаете только крупные строки, зрение могло заметно снизиться. Запишитесь на диагностику в ближайшее время.']:i<=5?['Есть повод проверить зрение','Возможно, острота зрения немного снизилась. Точный ответ даст осмотр у офтальмолога.']:['Вы хорошо видите','Отличный результат! Но раз в год проверка у врача всё равно нужна, особенно после 40.'];
+  res.innerHTML=`<b>${m[0]}</b><p>${m[1]} <a href="#zapis">Записаться →</a></p>`});chart.appendChild(b)});
+</script>
+</body>
+</html>
