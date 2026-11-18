@@ -15,6 +15,10 @@
 
 ## Как посмотреть
 
+Онлайн: https://prozreniye.vercel.app (обзор вариантов), https://prozreniye.vercel.app/sait/ (сайт), https://prozreniye.vercel.app/sait/index-v2.html (вторая главная).
+
+Локально:
+
 ```bash
 python3 -m http.server 4321
 ```
@@ -35,6 +39,12 @@ python3 -m http.server 4321
 
 ```bash
 cd sait && python3 build.py
+```
+
+Публикация на Vercel (из корня проекта):
+
+```bash
+npx vercel@latest deploy --prod
 ```
 
 ## Важно

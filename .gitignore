@@ -3,3 +3,5 @@
 .impeccable/
 _frame.html
 __pycache__/
+.vercel
+.env*
