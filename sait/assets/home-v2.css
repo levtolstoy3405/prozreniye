@@ -40,7 +40,7 @@
 .cue i{width:24px;height:40px;border-radius:12px;box-shadow:inset 0 0 0 1.5px oklch(1 0 0 / .7);position:relative}
 .cue i::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:#fff;animation:cue 1.8s var(--ease) infinite}
 @keyframes cue{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(12px)}}
-.credit{position:absolute;right:var(--margin);top:var(--s-4);z-index:2;font-size:11px;line-height:16px;color:oklch(1 0 0 / .6)}
+.credit{position:absolute;right:var(--margin);top:var(--s-4);z-index:2;font-size:12px;line-height:16px;color:oklch(1 0 0 / .6)}
 
 .sheet{position:relative;z-index:3;background:var(--bg);border-radius:var(--r-l) var(--r-l) 0 0;margin-top:calc(-1 * var(--r-l));box-shadow:0 -24px 64px -24px oklch(0.2 0.06 258 / .35)}
 .sheet::before{content:"";position:absolute;left:50%;top:var(--s-3);width:48px;height:4px;margin-left:-24px;border-radius:2px;background:var(--line)}
@@ -169,7 +169,13 @@
   .daylist .dot{grid-column:1;grid-row:1}
   .daylist .txt{grid-column:2;grid-row:2}
   .daylist li::before{left:11px}
-  .eyebox{height:240px}
+  .eyebox{height:168px}
+  .eyebox svg{height:96%}
+  .eyebox .tag,.eyebox .count{top:var(--s-2)}
+  .eyebox .tag{left:var(--s-2)}
+  .eyebox .count{right:var(--s-2)}
+  .eyebox .bar{left:var(--s-2);right:var(--s-2);bottom:var(--s-2)}
+  .story .vis-col{padding-block:var(--s-2)}
   .feelgrid>div,.svc4 a{grid-column:1 / -1}
   .svc4 a{min-height:0}
 }

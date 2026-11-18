@@ -16,7 +16,7 @@ P = {n: (root / 'partials' / f'{n}.html').read_text() for n in ('head', 'header'
 # (папка, доп. класс body, доп. стили, префикс к assets/, плашка-переключатель)
 VARIANTS = [
     ('.', '', [], '', None),
-    ('strogo', 'serif', ['serif.css'], '../', '<div class="variant-switch">Строгая версия<a href="../{page}">Обычная версия</a></div>\n'),
+    ('strogo', 'serif', ['serif.css'], '../', None),
 ]
 
 

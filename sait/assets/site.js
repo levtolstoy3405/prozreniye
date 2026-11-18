@@ -228,6 +228,37 @@
     });
   });
 
+  // шаги операции (.jr): подсвечиваются по очереди.
+  // В одну колонку (телефон) горит шаг, до которого долистали; в несколько колонок — по очереди, один раз.
+  if (html.classList.contains('anim')) {
+    document.querySelectorAll('.jr').forEach(list => {
+      const items = [...list.children];
+      if (items.length < 2) return;
+      const oneCol = () => Math.abs(items[0].getBoundingClientRect().left - items[1].getBoundingClientRect().left) < 2;
+      const light = i => items.forEach((li, k) => li.classList.toggle('lit', k === i));
+      let timed = false;
+      const onScroll = () => {
+        const r = list.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        if (!list.classList.contains('seq')) list.classList.add('seq');
+        if (oneCol()) {
+          const mid = innerHeight * 0.5;
+          let best = 0, dist = Infinity;
+          items.forEach((li, k) => { const b = li.getBoundingClientRect(); const d = Math.abs((b.top + b.bottom) / 2 - mid); if (d < dist) { dist = d; best = k; } });
+          light(best);
+        } else if (!timed && r.top < innerHeight * 0.7) {
+          timed = true;
+          let i = 0;
+          const next = () => { light(i); if (i < items.length - 1) setTimeout(() => { i++; next(); }, 900); };
+          next();
+        }
+      };
+      addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll);
+      onScroll();
+    });
+  }
+
   // оверлей сетки: G — колонки, Shift+G — плюс базовая линия 8px, ?grid в адресе — сразу включено
   const root = document.documentElement, badge = document.querySelector('.grid-badge');
   const label = () => { if (badge) badge.textContent = `Сетка ${getComputedStyle(root).getPropertyValue('--cols').trim()} кол. · ${getComputedStyle(root).getPropertyValue('--gutter').trim()}${root.classList.contains('show-base') ? ' · база 8px' : ''} · G`; };

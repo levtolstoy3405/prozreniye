@@ -323,6 +323,15 @@ dialog.menu[open]{animation:menuIn .5s var(--ease)}
 .jr li.op h3{color:var(--on-navy)}
 .jr .when{font-size:var(--t-xs);line-height:var(--l-xs);font-weight:500;color:var(--cyan-ink)}
 .jr li.op .when{color:var(--cyan)}
+/* поочерёдная подсветка шагов (site.js): постоянная подсветка «операции» снимается, горит текущий шаг */
+.jr li{transition:background .45s var(--ease),color .45s var(--ease)}
+.jr li h3,.jr li .when{transition:color .45s var(--ease)}
+.jr.seq li.op{background:var(--bg);color:inherit}
+.jr.seq li.op h3{color:var(--ink)}
+.jr.seq li.op .when{color:var(--cyan-ink)}
+.jr.seq li.lit{background:var(--navy);color:var(--on-navy-muted)}
+.jr.seq li.lit h3{color:var(--on-navy)}
+.jr.seq li.lit .when{color:var(--cyan)}
 .jr h3{font-size:var(--t-l);line-height:28px}
 .jr p{font-size:var(--t-s);line-height:var(--l-s)}
 
@@ -595,7 +604,7 @@ table.lens{margin-top:var(--s-7);font-size:var(--t-s);line-height:var(--l-s)}
 .docs-row{row-gap:var(--gutter)}
 .doc-file{grid-column:span 4;border-radius:var(--r-m);background:var(--surface);padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-7);text-decoration:none;transition:box-shadow .3s}
 a.doc-file:hover{box-shadow:inset 0 0 0 1px var(--ink)}
-.doc-file .ic{width:40px;height:56px;border-radius:var(--r-s);background:#fff;box-shadow:0 0 0 1px var(--line);display:grid;place-items:center;font-size:11px;font-weight:600;color:var(--cyan-ink)}
+.doc-file .ic{width:40px;height:56px;border-radius:var(--r-s);background:#fff;box-shadow:0 0 0 1px var(--line);display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--cyan-ink)}
 .doc-file b{color:var(--ink);font-weight:500;display:block}
 .doc-file span{font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted)}
 .cgrid{row-gap:var(--s-5)}
@@ -605,7 +614,7 @@ a.doc-file:hover{box-shadow:inset 0 0 0 1px var(--ink)}
 .cgrid dd a{text-decoration:none}
 .map{border-radius:var(--r-l);overflow:hidden;height:448px;background:var(--surface);position:relative;margin-top:var(--s-7)}
 .map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.6)}
-.map-btn{position:absolute;left:var(--s-5);bottom:var(--s-5);z-index:1;box-shadow:0 10px 30px -10px oklch(0.2 0.06 263 / .5)}
+.map-btn{margin-top:var(--s-4)}
 
 /* ---------- страницы услуг ---------- */
 .checks{display:grid;gap:var(--s-2)}
@@ -789,6 +798,55 @@ html.show-grid .grid-badge{display:block}
   .geo .in{padding-inline:var(--s-4)}
   .foot-main>*{grid-column:1 / -1!important}
   .vmodal .close{top:calc(-1 * var(--s-7))}
+}
+
+/* таблица линз на телефоне: название и производитель друг под другом, цена справа */
+@media (max-width:640px){
+  table.lens,table.lens tbody{display:block}
+  table.lens thead{display:none}
+  .lens tr{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:var(--s-4);align-items:center;padding:var(--s-3);border-bottom:1px solid var(--line)}
+  .lens td{padding:0!important;border:0;background:none!important}
+  .lens td:first-child{grid-row:1;color:var(--ink)}
+  .lens td:nth-child(2){grid-row:2;font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted)}
+  .lens td:last-child{grid-column:2;grid-row:1 / 3}
+  .lens tr.hl{background:color-mix(in oklch,var(--cyan) 14%,var(--bg))}
+}
+
+/* ---------- мобильная доводка ---------- */
+@media (max-width:1024px){
+  /* прайс: при прокрутке поиск уезжает под шапку, остаются видны только разделы */
+  .ptools{top:calc(var(--header) - 48px - var(--s-3) - var(--s-4))}
+  .pgroup{scroll-margin-top:calc(var(--header) + 80px)}
+}
+@media (max-width:640px){
+  /* 6. мелкий текст не меньше 12px */
+  .logo small{font-size:12px}
+  /* 7. заголовки страниц на узком экране чуть компактнее */
+  :root{--t-h1:clamp(32px,24px + 3vw,40px);--t-d:clamp(38px,28px + 3.4vw,44px)}
+  /* 5. зоны нажатия от 44px */
+  footer ul{gap:0}
+  footer ul a,footer ul li{display:block;padding-block:10px}
+  footer .big-tel{padding-block:6px}
+  .foot-bot{gap:0 var(--s-5)}
+  .foot-bot a,.foot-bot .linkbtn{display:inline-block;padding-block:12px}
+  .agree{padding-block:var(--s-2);align-items:center}
+  .agree input{width:24px;height:24px}
+  /* 3. таблица методик — карточками */
+  .tbl-wrap{overflow:visible;margin-inline:0;padding-inline:0}
+  table.methods,table.methods tbody{display:block;min-width:0}
+  table.methods thead{display:none}
+  .methods tr{display:grid;gap:var(--s-3);padding:var(--s-5)!important;margin-bottom:var(--s-3);border:1px solid var(--line);border-radius:var(--r-m)}
+  .methods tr>*{padding:0!important;border:0!important;background:none!important;border-radius:0!important;width:auto!important;text-align:left!important}
+  .methods tr.main{background:var(--surface)}
+  .methods td::before{content:attr(data-label);display:block;font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted);font-weight:400;margin-bottom:2px}
+  .methods .price{font-size:var(--t-b)}
+  /* 4. врачи — компактные карточки: фото слева, текст справа */
+  .dcard{display:grid;grid-template-columns:112px minmax(0,1fr);column-gap:var(--s-4);align-items:start}
+  .dcard .ph{grid-column:1;grid-row:1 / span 5;aspect-ratio:4/5}
+  .dcard .ph .tag{display:none}
+  .dcard>:not(.ph){grid-column:2}
+  .dcard h3{margin-top:0}
+  .docs{row-gap:var(--s-6)}
 }
 
 @media (prefers-reduced-motion:reduce){
