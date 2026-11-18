@@ -4,6 +4,7 @@
    Сетка      12 колонок · межколонник 32 · контейнер 1312
               ≤1024: 8 колонок · 24     ≤640: 4 колонки · 16
    Шаг        8px (4 — полшага). Все отступы — токены --s-*
+   Ритм       секция 96 / 64 / 48 · заголовок→содержимое 48 / 32
    Шрифт      Geologica · 9 ступеней · интерлиньяж кратен 4
    Радиусы    8 / 16 / 24 + pill + круг
    Композиции на 12 колонок (только эти четыре):
@@ -51,15 +52,15 @@
 
   /* сетка */
   --cols: 12; --gutter: 32px; --margin: clamp(24px, 5vw, 64px); --max: 1312px;
-  --section: var(--s-10);
-  --head-gap: var(--s-8);
+  --section: var(--s-9);
+  --head-gap: var(--s-7);
 
   --ease: cubic-bezier(.16,1,.3,1);
   --header: 72px;
   --z-sticky: 10; --z-menu: 40; --z-overlay: 90;
 }
-@media (max-width:1024px){ :root{ --cols:8; --gutter:24px; --margin:32px; --section:var(--s-9); --head-gap:var(--s-7) } }
-@media (max-width:640px){ :root{ --cols:4; --gutter:16px; --margin:16px; --section:var(--s-8); --head-gap:var(--s-6); --t-n:24px } }
+@media (max-width:1024px){ :root{ --cols:8; --gutter:24px; --margin:32px; --section:var(--s-8); --head-gap:var(--s-6) } }
+@media (max-width:640px){ :root{ --cols:4; --gutter:16px; --margin:16px; --section:var(--s-7); --head-gap:var(--s-6); --t-n:24px } }
 
 /* ---------- основа ---------- */
 *{box-sizing:border-box;margin:0}
@@ -123,7 +124,7 @@ section[id]{scroll-margin-top:var(--header)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s-2);font:inherit;font-weight:600;font-size:var(--t-s);line-height:var(--l-s);height:48px;padding:0 var(--s-5);border:0;border-radius:var(--r-pill);cursor:pointer;text-decoration:none;white-space:nowrap;transition:transform .3s var(--ease),background .2s,box-shadow .3s}
 .btn:active{transform:scale(.98)}
 .btn-light{background:var(--on-navy);color:var(--navy)}
-.btn-light:hover{background:#fff;box-shadow:0 0 0 6px color-mix(in oklch,var(--cyan) 30%,transparent)}
+.btn-light:hover{background:#fff;box-shadow:inset 0 0 0 2px var(--cyan)}
 .btn-navy{background:var(--navy);color:var(--on-navy)}
 .btn-navy:hover{background:var(--navy-2)}
 .btn-ghost{color:var(--on-navy);box-shadow:inset 0 0 0 1px color-mix(in oklch,var(--on-navy) 35%,transparent);background:transparent}
@@ -216,15 +217,25 @@ dialog.menu[open]{animation:menuIn .5s var(--ease)}
 .photo-hero{position:relative;border-radius:var(--r-l);overflow:hidden;aspect-ratio:4/5;width:100%}
 .caption{position:absolute;left:var(--s-5);right:var(--s-5);bottom:var(--s-5);display:flex;justify-content:space-between;align-items:end;font-size:var(--t-xs);line-height:var(--l-xs);color:var(--on-navy-muted);z-index:1}
 .caption b{display:block;font-size:var(--t-s);line-height:var(--l-s);color:var(--on-navy);font-weight:500}
-.reticle{position:absolute;width:62%;left:-14%;bottom:-8%;color:var(--cyan);pointer-events:none}
-.reticle circle,.reticle line{fill:none;stroke:currentColor;stroke-width:1}
-.anim .reticle .draw{stroke-dasharray:1000;animation:draw 2.4s var(--ease) .3s backwards}
 .iris-wrap{position:relative;width:100%}
 .iris{aspect-ratio:1;border-radius:50%;overflow:hidden;background:#000}
 .iris img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);animation:settle 2s var(--ease) forwards}
-.iris-wrap .reticle{width:130%;left:-15%;top:-15%;bottom:auto}
 @keyframes settle{to{transform:scale(1)}}
-@keyframes draw{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}
+/* шкала диоптрий под фото: метка при загрузке едет с −3 к 0 — так работает коррекция */
+.diopter{color:var(--cyan);pointer-events:none;max-width:528px;margin-left:auto}
+.diopter svg{display:block;width:100%;height:auto;overflow:visible}
+.diopter .base{stroke:var(--on-navy-line);stroke-width:1}
+.diopter .ticks line{stroke:currentColor;stroke-width:1;opacity:.75}
+.diopter .lab text{fill:var(--on-navy-muted);font-size:16px;font-family:inherit;text-anchor:middle;font-variant-numeric:tabular-nums}
+.diopter .mark path{fill:var(--on-navy)}
+.diopter .mark line{stroke:var(--on-navy);stroke-width:1.5}
+.diopter .unit{display:block;margin-top:var(--s-1);text-align:right;font-size:var(--t-xs);line-height:var(--l-xs);color:var(--on-navy-muted)}
+.hero-visual .diopter{position:absolute;right:0;width:100%;top:calc(100% + var(--s-4))}
+/* место под шкалу: высота svg = 62/600 ширины + подпись */
+.hero-visual:has(.diopter){margin-bottom:calc(min(10.4%, 55px) + var(--s-4) + var(--s-5))}
+.iris-wrap .diopter{margin-top:var(--s-6);margin-inline:auto}
+.anim .diopter .mark{animation:dio 2.2s var(--ease) .5s backwards}
+@keyframes dio{from{transform:translateX(var(--shift))}}
 /* появление: по умолчанию всё видно; анимация только если вкладка на экране (класс .anim ставится в <head>) */
 .anim .rise{animation:rise 1s var(--ease) backwards}
 .anim .rise:nth-child(2){animation-delay:.08s}.anim .rise:nth-child(3){animation-delay:.16s}.anim .rise:nth-child(4){animation-delay:.24s}
@@ -232,6 +243,7 @@ dialog.menu[open]{animation:menuIn .5s var(--ease)}
 
 /* полоса цифр под героем главной: 4 × 3 колонки */
 .ledger{border-bottom:1px solid var(--line)}
+.ledger+section{padding-top:var(--s-7)}
 .ledger .wrap{padding-block:var(--s-7);row-gap:var(--s-6)}
 .ledger .wrap>div{grid-column:span 3;border-top:1px solid var(--ink);padding-top:var(--s-4)}
 .ledger .num{display:block;font-size:var(--t-h2);line-height:48px;font-weight:500;color:var(--ink);letter-spacing:-0.03em;white-space:nowrap}
@@ -241,21 +253,27 @@ dialog.menu[open]{animation:menuIn .5s var(--ease)}
 .svc{list-style:none;padding:0;border-top:1px solid var(--ink)}
 .svc li{border-bottom:1px solid var(--line)}
 .svc a{isolation:isolate;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter);row-gap:var(--s-1);align-items:center;padding-block:var(--s-6);text-decoration:none;position:relative;transition:background .3s var(--ease)}
-.svc a::before{content:"";position:absolute;inset:0 calc(-1 * var(--s-4));border-radius:var(--r-m);background:var(--surface);opacity:0;transition:opacity .3s;z-index:-1}
+.svc a::before{content:"";position:absolute;inset:0;border-radius:var(--r-m);background:var(--surface);opacity:0;transition:opacity .3s;z-index:-1}
 .svc a:hover::before{opacity:1}
 .svc h3{grid-column:1 / span 4;grid-row:1 / 3;transition:transform .5s var(--ease)}
-.svc a:hover h3{transform:translateX(var(--s-2))}
+.svc a:hover h3{transform:translateX(var(--s-4))}
 .svc p{grid-column:5 / span 5;grid-row:1 / 3;color:var(--muted);font-size:var(--t-s);line-height:var(--l-s)}
 .svc .dur{grid-column:10 / span 2;grid-row:1;font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted);align-self:end}
 .svc .price{grid-column:10 / span 2;grid-row:2;font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted);align-self:start}
 .svc .price b{color:var(--ink);font-weight:600;font-size:var(--t-b);line-height:var(--l-b);margin-left:var(--s-1)}
-.svc .arr{grid-column:12;grid-row:1 / 3;justify-self:end;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line);transition:background .3s,color .3s,transform .4s var(--ease)}
-.svc a:hover .arr{background:var(--navy);color:#fff;transform:rotate(-45deg)}
+.svc .arr{grid-column:12;grid-row:1 / 3;justify-self:end;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line);transition:background .3s,color .3s}
+.svc a:hover .arr{background:var(--navy);color:#fff}
+.svc .arr i,.svc4 .pr span i{font-style:normal;display:block;transition:transform .4s var(--ease)}
+.svc a:hover .arr i{transform:rotate(-45deg)}
 .svc-note{margin-top:var(--s-5);font-size:var(--t-s);line-height:var(--l-s);color:var(--muted)}
 
 /* ---------- врач на главной: B ---------- */
 .surgeon{background:var(--surface)}
-.surgeon .wrap{row-gap:var(--s-7);align-items:center}
+.surgeon .wrap{row-gap:var(--s-7);align-items:stretch}
+/* описание врача: верх — по верху фото, ряд других врачей — по низу фото */
+.surgeon .wrap>:last-child{display:flex;flex-direction:column;justify-content:space-between;gap:var(--s-7)}
+.surgeon .role{line-height:16px}
+.creds b.tbd{color:var(--muted);font-family:inherit;font-size:var(--t-s);font-weight:400;letter-spacing:0}
 .surgeon .wrap>:first-child{grid-column:1 / span 5}
 .surgeon .wrap>:last-child{grid-column:7 / span 6}
 .portrait{position:relative;background:linear-gradient(180deg,oklch(0.93 0.02 245),oklch(0.89 0.03 250));border-radius:var(--r-l);aspect-ratio:4/5;overflow:hidden}
@@ -267,12 +285,18 @@ dialog.menu[open]{animation:menuIn .5s var(--ease)}
 .creds b,.creds .num{display:block;color:var(--ink);font-weight:500;font-size:var(--t-n);line-height:40px;letter-spacing:-.02em}
 .creds span{font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted)}
 .surgeon .txt{margin-top:var(--s-6)}
-.team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gutter);row-gap:var(--s-4);margin-top:var(--s-7)}
-.team a{display:grid;gap:var(--s-3);text-decoration:none}
+.team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gutter);row-gap:var(--s-4)}
+.team a,.team button{display:grid;gap:var(--s-3);text-decoration:none;font:inherit;color:inherit;text-align:left;background:none;border:0;padding:0;cursor:pointer;align-content:start}
 .team img{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:top;background:var(--bg)}
 .team b{display:block;color:var(--ink);font-weight:500;font-size:var(--t-s);line-height:var(--l-s)}
 .team span{font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted)}
-.team a:hover b{text-decoration:underline;text-underline-offset:3px}
+.team a:hover b,.team button:hover b{text-decoration:underline;text-underline-offset:3px}
+.team button img{transition:transform .4s var(--ease)}
+.team button:hover img{outline:1px solid var(--ink);outline-offset:-1px}
+/* смена врача на месте: короткое затухание фото и текста */
+#docSwap .portrait img,#docSwap .doc-body{transition:opacity .22s var(--ease),transform .4s var(--ease)}
+#docSwap.swapping .portrait img{opacity:0;transform:translateX(-50%) scale(.98)}
+#docSwap.swapping .doc-body{opacity:0;transform:translateY(8px)}
 
 /* ---------- шаги: 4 × 3 колонки ---------- */
 .steps{row-gap:var(--s-7)}
@@ -280,6 +304,12 @@ dialog.menu[open]{animation:menuIn .5s var(--ease)}
 .step .dot{width:48px;height:48px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 1px var(--ink);display:grid;place-items:center;font-weight:500;color:var(--ink);position:relative;z-index:1}
 .step:not(:last-child)::before{content:"";position:absolute;top:24px;left:48px;right:calc(-1 * var(--gutter));height:1px;background:var(--line)}
 .step:last-child .dot{background:var(--navy);color:#fff;box-shadow:none}
+/* поочерёдное «загорание» шагов: шаг горит → линия прорисовывается → следующий шаг горит, прошлый гаснет */
+.steps.seq .step .dot{transition:background .45s var(--ease),color .45s var(--ease),box-shadow .45s var(--ease)}
+.steps.seq .step:last-child .dot{background:var(--bg);color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.steps.seq .step.lit .dot{background:var(--navy);color:#fff;box-shadow:none}
+.steps.seq .step:not(:last-child)::after{content:"";position:absolute;top:23px;left:48px;right:calc(-1 * var(--gutter));height:2px;background:var(--navy);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease)}
+.steps.seq .step.flow::after{transform:scaleX(1)}
 .step h3{margin-top:var(--s-5);font-size:var(--t-l);line-height:28px}
 .step .t{display:block;margin-top:var(--s-1);font-size:var(--t-xs);line-height:var(--l-xs);color:var(--cyan-ink);font-weight:500}
 .step p{margin-top:var(--s-3);font-size:var(--t-s);line-height:var(--l-s);color:var(--muted)}
@@ -326,7 +356,7 @@ dialog.menu[open]{animation:menuIn .5s var(--ease)}
 .maprev p{font-size:var(--t-s);line-height:var(--l-s);color:var(--muted);margin-top:var(--s-2)}
 .maprev .links{display:grid;gap:var(--s-2)}
 .maprev .links a{display:flex;justify-content:space-between;align-items:center;gap:var(--s-3);height:56px;padding:0 var(--s-4);border-radius:var(--r-m);background:var(--bg);text-decoration:none;color:var(--ink);font-weight:500;transition:box-shadow .2s}
-.maprev .links a:hover{box-shadow:0 0 0 1px var(--ink)}
+.maprev .links a:hover{box-shadow:inset 0 0 0 1px var(--ink)}
 .maprev .links small{font-weight:400;color:var(--muted);font-size:var(--t-xs)}
 
 /* ---------- запись: B ---------- */
@@ -345,10 +375,35 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-4)}
 label{display:grid;gap:var(--s-2);font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted)}
 input,select{font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:var(--r-m);height:56px;padding:0 var(--s-4);transition:border-color .2s,box-shadow .2s;width:100%}
 input::placeholder{color:oklch(0.55 0.02 263)}
-input:focus,select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 4px color-mix(in oklch,var(--cyan) 25%,transparent)}
+input:focus,select:focus{outline:none;border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
 .agree{display:flex;gap:var(--s-3);align-items:start;font-size:var(--t-xs);line-height:var(--l-xs)}
 .agree input{width:20px;height:20px;padding:0;margin:0;flex:none;accent-color:var(--navy)}
 form .btn{justify-self:start;height:56px;padding:0 var(--s-6)}
+/* поля: подпись над полем, ошибка под полем */
+.field{display:grid;gap:var(--s-2)}
+.flabel{font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted)}
+.ferr{font-size:var(--t-xs);line-height:var(--l-xs);color:oklch(0.52 0.18 25);min-height:0}
+.ferr:empty{display:none}
+input.bad{border-color:oklch(0.55 0.18 25);box-shadow:inset 0 0 0 1px oklch(0.55 0.18 25)}
+
+/* свой выпадающий список */
+.dsel{position:relative}
+.dsel-native{position:absolute;inset:0;opacity:0;pointer-events:none}
+.dsel-btn{width:100%;height:56px;display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);padding:0 var(--s-4);font:inherit;font-size:16px;color:var(--ink);text-align:left;background:#fff;border:1px solid var(--line);border-radius:var(--r-m);cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.dsel-btn svg{flex:none;color:var(--muted);transition:transform .3s var(--ease)}
+.dsel-btn:hover{border-color:var(--ink)}
+.dsel-btn:focus-visible{outline:none;border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+.dsel.open .dsel-btn{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+.dsel.open .dsel-btn svg{transform:rotate(180deg)}
+.dsel-val{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dsel-list{position:absolute;left:0;right:0;top:calc(100% + var(--s-1));z-index:20;list-style:none;margin:0;padding:var(--s-1);background:#fff;border:1px solid var(--line);border-radius:var(--r-m);box-shadow:0 16px 40px -20px oklch(0.2 0.06 263 / .35);opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .2s var(--ease),transform .3s var(--ease),visibility 0s .2s}
+.dsel-list::before{content:"";position:absolute;left:0;right:0;top:calc(-1 * var(--s-1) - 1px);height:var(--s-1)}
+.dsel.open .dsel-list{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.dsel-list li{display:flex;justify-content:space-between;align-items:center;gap:var(--s-3);padding:var(--s-3) var(--s-3);border-radius:var(--r-s);font-size:16px;line-height:24px;color:var(--ink);cursor:pointer}
+.dsel-list li.active{background:var(--surface)}
+.dsel-list li[aria-selected="true"]{font-weight:500}
+.dsel-list li[aria-selected="true"]::after{content:"";width:16px;height:16px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5.5 12.5l4 4 9-9' fill='none' stroke='%2316234f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat}
+
 .ok{display:none;padding:var(--s-4);border-radius:var(--r-m);background:oklch(0.94 0.04 160);color:oklch(0.32 0.07 160);font-size:var(--t-s);line-height:var(--l-s)}
 form.sent .ok{display:block}
 
@@ -363,7 +418,7 @@ form.sent .ok{display:block}
 .callout{margin-top:var(--s-6);padding:var(--s-5);border-radius:var(--r-m);background:var(--surface);font-size:var(--t-s);line-height:var(--l-s)}
 .callout b{color:var(--ink);font-weight:500}
 .legal{font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted);margin-top:var(--s-5)}
-#plist .legal{padding-bottom:var(--s-8)}
+#plist .legal{padding-bottom:var(--s-5)}
 .tags{display:flex;flex-wrap:wrap;gap:var(--s-2);margin-top:var(--s-6)}
 .tags span{height:40px;display:inline-flex;align-items:center;padding:0 var(--s-4);border-radius:var(--r-pill);background:var(--surface);color:var(--ink);font-size:var(--t-s)}
 
@@ -376,18 +431,18 @@ table.methods{min-width:880px;font-size:var(--t-s);line-height:var(--l-s)}
 .methods tbody th{color:var(--ink);font-weight:500;font-size:var(--t-b);width:16.66%}
 .methods col.c-how{width:33.33%}
 .methods tr.main>*{background:var(--surface)}
-.methods tr.main>:first-child{padding-left:var(--s-4);border-radius:var(--r-m) 0 0 var(--r-m)}
+.methods tr>:first-child{padding-left:var(--s-4)}
+.methods tr>:last-child{padding-right:var(--s-4)!important}
+.methods tr.main>:first-child{border-radius:var(--r-m) 0 0 var(--r-m)}
 .methods tr.main>:last-child{border-radius:0 var(--r-m) var(--r-m) 0}
 .methods .badge{display:inline-block;margin-top:var(--s-2);font-size:var(--t-xs);line-height:var(--l-xs);font-weight:600;color:var(--on-navy);background:var(--navy);padding:2px var(--s-3);border-radius:var(--r-pill)}
 .methods .price{white-space:nowrap;color:var(--ink);font-weight:600;text-align:right;padding-right:0}
 .methods thead th:last-child{text-align:right;padding-right:0}
 table.lens{margin-top:var(--s-7);font-size:var(--t-s);line-height:var(--l-s)}
-.lens th,.lens td{text-align:left;padding:var(--s-3) 0;border-bottom:1px solid var(--line)}
+.lens th,.lens td{text-align:left;padding:var(--s-3) var(--s-3);border-bottom:1px solid var(--line)}
 .lens thead th{font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted);font-weight:500;border-bottom:1px solid var(--ink)}
 .lens td:last-child,.lens th:last-child{text-align:right;white-space:nowrap;color:var(--ink);font-weight:600}
 .lens tr.hl td{background:color-mix(in oklch,var(--cyan) 14%,var(--bg))}
-.lens tr.hl td:first-child{padding-left:var(--s-3)}
-.lens tr.hl td:last-child{padding-right:var(--s-3)}
 
 /* ---------- результат: 1–7 | 8–12 ---------- */
 .result{row-gap:var(--gutter)}
@@ -397,6 +452,17 @@ table.lens{margin-top:var(--s-7);font-size:var(--t-s);line-height:var(--l-s)}
 .result figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,oklch(0.18 0.05 263 / .75))}
 .result figcaption{position:absolute;left:var(--s-5);right:var(--s-5);bottom:var(--s-5);color:#fff;z-index:1;font-size:var(--t-xs);line-height:var(--l-xs)}
 .result figcaption b{display:block;font-size:var(--t-l);line-height:28px;font-weight:500}
+
+/* ---------- «что меняется после»: фото 1–5 | текст 7–11 ---------- */
+.after{list-style:none;padding:0;display:grid;row-gap:var(--s-7)}
+.after li{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));column-gap:var(--gutter);align-items:center}
+.after figure{grid-column:1 / span 5;aspect-ratio:3/2;border-radius:var(--r-l);overflow:hidden;background:var(--surface)}
+.after figure img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.after li:hover figure img{transform:scale(1.03)}
+.after .txt{grid-column:7 / span 5}
+.after h3{margin-top:var(--s-2)}
+.after p{margin-top:var(--s-3);color:var(--muted)}
+.after .note{margin-top:var(--s-4);padding-top:var(--s-4);border-top:1px solid var(--line);font-size:var(--t-s);line-height:var(--l-s)}
 
 /* ---------- карточка цен, мини-врач ---------- */
 .pricebox{border-radius:var(--r-l);background:var(--navy);color:var(--on-navy-muted);padding:var(--s-6)}
@@ -408,7 +474,7 @@ table.lens{margin-top:var(--s-7);font-size:var(--t-s);line-height:var(--l-s)}
 .pricebox small{display:block;margin-top:var(--s-4);font-size:var(--t-xs);line-height:var(--l-xs)}
 .pricebox small a{color:var(--on-navy)}
 .mini-doc{display:grid;grid-template-columns:128px 1fr;gap:var(--s-5);align-items:center;padding:var(--s-5);border-radius:var(--r-l);background:var(--surface);text-decoration:none;transition:box-shadow .3s}
-.mini-doc:hover{box-shadow:0 0 0 1px var(--line),0 16px 40px -24px oklch(0.3 0.08 263 / .4)}
+.mini-doc:hover{box-shadow:inset 0 0 0 1px var(--ink)}
 .mini-doc .ph{width:128px;height:128px;border-radius:50%;overflow:hidden;background:linear-gradient(180deg,oklch(0.93 0.02 245),oklch(0.88 0.03 250));position:relative}
 .mini-doc .ph img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:100%;width:auto;max-width:none;mix-blend-mode:multiply}
 .mini-doc h3{margin-top:var(--s-1);font-size:var(--t-l);line-height:28px}
@@ -420,8 +486,12 @@ table.lens{margin-top:var(--s-7);font-size:var(--t-s);line-height:var(--l-s)}
 .faq details:first-child{border-top:1px solid var(--ink)}
 .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);padding:var(--s-5) 0;font-size:var(--t-l);line-height:28px;font-weight:500;color:var(--ink)}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line);transition:rotate .35s var(--ease),background .2s}
-.faq details[open] summary::after{rotate:45deg;background:var(--navy);color:#fff;box-shadow:none}
+.faq summary::after{content:"+";flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line);transition:background .2s,color .2s}
+.faq details[open] summary::after{background:var(--navy);color:#fff;box-shadow:none}
+/* плавное раскрытие: высоту анимирует site.js, текст проявляется */
+.faq details{overflow:hidden}
+.faq details>p{transition:opacity .35s var(--ease),transform .45s var(--ease)}
+.faq details.closing>p,.faq details.opening>p{opacity:0;transform:translateY(-6px)}
 .faq details p{padding:0 var(--s-7) var(--s-5) 0}
 
 /* ---------- врачи: 4 × 3 колонки ---------- */
@@ -488,6 +558,31 @@ table.lens{margin-top:var(--s-7);font-size:var(--t-s);line-height:var(--l-s)}
 .empty{display:none;padding:var(--s-8) 0;text-align:center;color:var(--muted)}
 .empty b{display:block;color:var(--ink);font-size:var(--t-h3);line-height:var(--l-h3);font-weight:500;margin-bottom:var(--s-2)}
 
+/* ---------- юридический документ: содержание 1–4 | текст 6–12 ---------- */
+.legaldoc{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));column-gap:var(--gutter);row-gap:var(--s-7);align-items:start}
+.legaldoc>.toc{grid-column:1 / span 4}
+.legaldoc>.doc{grid-column:6 / span 7}
+.toc-t{font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted);margin-bottom:var(--s-3)}
+.toc ol{list-style:none;padding:0;border-top:1px solid var(--ink);counter-reset:toc}
+.toc li{counter-increment:toc;border-bottom:1px solid var(--line)}
+.toc ol a{display:flex;gap:var(--s-3);padding:var(--s-3) 0;font-size:var(--t-s);line-height:var(--l-s);color:var(--ink);text-decoration:none}
+.toc ol a::before{content:counter(toc);min-width:24px;color:var(--muted);font-variant-numeric:tabular-nums}
+.toc ol a:hover{color:var(--cyan-ink)}
+.toc .callout{font-size:var(--t-xs);line-height:var(--l-xs)}
+.doc h2{display:flex;gap:var(--s-4);align-items:baseline;font-size:var(--t-h3);line-height:var(--l-h3);margin-top:var(--s-8);padding-top:var(--s-5);border-top:1px solid var(--ink);scroll-margin-top:calc(var(--header) + var(--s-5))}
+.doc h2:first-child{margin-top:0}
+.doc h2 .num{min-width:32px;color:var(--muted);font-weight:400}
+.doc h3{font-size:var(--t-l);line-height:28px;margin-top:var(--s-6);margin-left:calc(32px + var(--s-4))}
+.doc .terms div{grid-template-columns:180px 1fr}
+.doc p,.doc ul,.doc .req{margin-top:var(--s-4);margin-left:calc(32px + var(--s-4))}
+.doc ul{padding-left:var(--s-5);display:grid;gap:var(--s-2)}
+.doc li{max-width:62ch}
+.req div{display:grid;grid-template-columns:140px 1fr;gap:var(--s-4);padding:var(--s-3) 0;border-bottom:1px solid var(--line)}
+.req dt{color:var(--muted);font-size:var(--t-s)}
+.req dd{margin:0;color:var(--ink)}
+.req a,.doc a{color:var(--ink)}
+.agree a{color:var(--ink)}
+
 /* ---------- о клинике ---------- */
 .geo{position:relative;border-radius:var(--r-l);overflow:hidden;min-height:544px;align-items:end;color:#fff;padding-block:var(--s-8)}
 .geo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -499,7 +594,7 @@ table.lens{margin-top:var(--s-7);font-size:var(--t-s);line-height:var(--l-s)}
 .cities span{height:32px;display:inline-flex;align-items:center;padding:0 var(--s-3);border-radius:var(--r-pill);background:oklch(1 0 0 / .14);backdrop-filter:blur(6px);font-size:var(--t-xs)}
 .docs-row{row-gap:var(--gutter)}
 .doc-file{grid-column:span 4;border-radius:var(--r-m);background:var(--surface);padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-7);text-decoration:none;transition:box-shadow .3s}
-a.doc-file:hover{box-shadow:0 0 0 1px var(--ink)}
+a.doc-file:hover{box-shadow:inset 0 0 0 1px var(--ink)}
 .doc-file .ic{width:40px;height:56px;border-radius:var(--r-s);background:#fff;box-shadow:0 0 0 1px var(--line);display:grid;place-items:center;font-size:11px;font-weight:600;color:var(--cyan-ink)}
 .doc-file b{color:var(--ink);font-weight:500;display:block}
 .doc-file span{font-size:var(--t-xs);line-height:var(--l-xs);color:var(--muted)}
@@ -517,8 +612,7 @@ a.doc-file:hover{box-shadow:0 0 0 1px var(--ink)}
 .checks label{display:flex;gap:var(--s-4);align-items:center;min-height:56px;padding:var(--s-3) var(--s-4);border-radius:var(--r-m);background:var(--surface);cursor:pointer;color:var(--ink);font-size:var(--t-b);line-height:var(--l-b);transition:background .2s,box-shadow .2s}
 .checks label:hover{box-shadow:inset 0 0 0 1px var(--line)}
 .checks input{appearance:none;width:24px;height:24px;border-radius:var(--r-s);background:#fff;border:1.5px solid var(--line);display:grid;place-items:center;flex:none;cursor:pointer;margin:0;padding:0}
-.checks input:checked{background:var(--navy);border-color:var(--navy)}
-.checks input:checked::after{content:"✓";color:#fff;font-size:13px;font-weight:700}
+.checks input:checked{background:var(--navy) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.5 3.5 7.5-8' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;border-color:var(--navy)}
 .checks label:has(input:checked){background:color-mix(in oklch,var(--cyan) 14%,var(--bg))}
 .verdict{margin-top:var(--s-6);border-radius:var(--r-m);padding:var(--s-5);background:var(--navy);color:var(--on-navy-muted);display:flex;gap:var(--s-4);align-items:center;justify-content:space-between;flex-wrap:wrap}
 .verdict b{display:block;color:var(--on-navy);font-weight:500;font-size:var(--t-l);line-height:28px}
@@ -622,7 +716,7 @@ html.show-grid .grid-badge{display:block}
   .surgeon .wrap>:first-child{grid-column:1 / span 4!important}
   .hero .meta,.creds,.team,.prof .kfacts{grid-template-columns:repeat(4,minmax(0,1fr))}
   .step{grid-column:span 4}
-  .step:nth-child(2n)::before{display:none}
+  .step:nth-child(2n)::before,.steps.seq .step:nth-child(2n)::after{display:none}
   .jr li{grid-column:span 4}
   .tech figure.tall{grid-column:1 / -1;grid-row:auto;min-height:416px}
   .tech figure,.tech .list{grid-column:span 4}
@@ -630,6 +724,8 @@ html.show-grid .grid-badge{display:block}
   .reviews .grid>.maprev{grid-column:1 / -1}
   .result figure.big{grid-column:1 / -1;grid-row:auto;min-height:416px}
   .result figure{grid-column:span 4}
+  .after figure{grid-column:1 / span 4}
+  .after .txt{grid-column:5 / span 4}
   .dcard,.docs:has(>:nth-child(3):last-child)>.dcard{grid-column:span 4}
   .tests>div{grid-column:span 4}
   .doc-file{grid-column:span 4}
@@ -640,6 +736,7 @@ html.show-grid .grid-badge{display:block}
   .prof .wrap>.txt{padding-bottom:0;order:-1}
   .prof .wrap>.portrait{height:480px;grid-column:2 / span 6!important}
   .sticky{position:static}
+  .legaldoc>.toc,.legaldoc>.doc{grid-column:1 / -1}
   .geo .in{grid-column:1 / -1;padding-inline:var(--s-6)}
   .foot-main>:nth-child(1){grid-column:1 / -1}
   .foot-main>:nth-child(2),.foot-main>:nth-child(3){grid-column:span 2}
@@ -671,7 +768,9 @@ html.show-grid .grid-badge{display:block}
   .team{grid-template-columns:1fr}
   .creds,.prof .kfacts{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--s-4)}
   .step,.jr li,.tests>div,.dcard,.docs:has(>:nth-child(3):last-child)>.dcard,.doc-file,.tech figure,.tech .list,.result figure,.reviews .grid>*,.reviews .grid:not(:has(>:nth-child(3)))>*{grid-column:1 / -1}
-  .step::before{display:none}
+  .step::before,.steps.seq .step::after{display:none}
+  .after li{row-gap:var(--s-4)}
+  .after figure,.after .txt{grid-column:1 / -1}
   form .row{grid-template-columns:1fr}
   .contact dl{grid-template-columns:1fr;row-gap:0}
   .contact dt,.contact dd{grid-column:auto}
@@ -682,6 +781,9 @@ html.show-grid .grid-badge{display:block}
   .faq details p{padding-right:0}
   .prof .wrap>.portrait{grid-column:1 / -1!important;height:400px}
   .bio li{grid-template-columns:1fr;row-gap:var(--s-1)}
+  .doc p,.doc ul,.doc .req,.doc h3{margin-left:0}
+  .doc .terms div{grid-template-columns:1fr}
+  .req div{grid-template-columns:1fr;gap:var(--s-1)}
   .bio p{grid-column:auto}
   .geo{min-height:480px;padding-block:var(--s-6)}
   .geo .in{padding-inline:var(--s-4)}

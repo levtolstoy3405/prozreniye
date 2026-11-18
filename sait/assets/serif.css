@@ -1,0 +1,58 @@
+/* =====================================================================
+   Вариант «Строгий»: антиква в заголовках, прямые углы.
+   Подключается поверх site.css классом .serif на <body>.
+   Сетка, шкала размеров и отступы — те же.
+   ===================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..600&display=swap");
+
+.serif{
+  --serif: "Source Serif 4", "PT Serif", Georgia, serif;
+  /* углы: медиа и блоки прямые, интерактивное — почти прямое */
+  --r-s: 2px; --r-m: 2px; --r-l: 0px; --r-pill: 4px;
+}
+
+/* ---------- антиква: заголовки и крупные цифры ---------- */
+.serif h1,.serif h2,.serif h3,.serif .h4,.serif .display,
+.serif .ledger .num,.serif .kfacts b,.serif .creds b,.serif .creds .num,.serif .stats b,
+.serif .mini-doc h3,.serif .dcard h3,.serif .faq summary,
+.serif .rec .cost,.serif .facts3 b,.serif .ages b,.serif .empty b{
+  font-family:var(--serif);font-optical-sizing:auto;font-variant-numeric:lining-nums tabular-nums
+}
+.serif h1,.serif .hero h1{font-weight:500;letter-spacing:-0.018em;line-height:1.04}
+.serif h2{font-weight:500;letter-spacing:-0.012em;line-height:1.08}
+.serif h3,.serif .h4{font-weight:600;letter-spacing:-0.005em}
+.serif .faq summary{font-weight:600}
+.serif .ledger .num,.serif .kfacts b,.serif .creds b,.serif .creds .num,.serif .stats b,.serif .rec .cost,.serif .facts3 b,.serif .ages b{font-weight:500;letter-spacing:-0.01em}
+/* акцент в заголовке — курсив антиквы */
+.serif .hero h1 em,.serif .phero h1 em{font-style:italic;font-weight:400}
+
+/* ---------- структура «как в документе»: линейка над заголовком секции ---------- */
+.serif .head{border-top:1px solid var(--ink);padding-top:var(--s-5)}
+.serif .tech .head{border-top-color:var(--on-navy-line)}
+/* полоса цифр без своей нижней границы: её роль берёт линейка следующего заголовка */
+.serif .ledger{border-bottom:0}
+
+/* ---------- круги → квадраты (кроме радужки глаза) ---------- */
+.serif .burger,.serif .call,.serif .menu .close,.serif .vmodal .close,
+.serif .svc .arr,.serif .step .dot,.serif .vid .play,.serif .faq summary::after,
+.serif .team img,.serif .mini-doc .ph{border-radius:var(--r-s)}
+.serif .lst li::before{border-radius:0}
+.serif .portrait,.serif .prof .wrap>.portrait{border-radius:0}
+
+/* остальные круглые элементы интерфейса — тоже квадраты; радиокнопки и радужка остаются круглыми */
+.serif .facts3 .ico,.serif .daylist .dot,.serif .svc4 .pr span,.serif .dd-panel a{border-radius:var(--r-s)}
+.serif .eyebox,.serif .room,.serif .sheet{border-radius:0}
+.serif .sheet::before{border-radius:0}
+.serif .curtain h1 em{font-style:italic;font-weight:400}
+
+/* прайс: заголовки разделов антиквой, строки — гротеском */
+.serif .pgroup h2{font-weight:600}
+
+/* кнопки: прямоугольник 4px, чуть плотнее — чтобы оставались «кнопками» */
+.serif .btn{letter-spacing:.01em}
+.serif .btn-ghost{box-shadow:inset 0 0 0 1.5px color-mix(in oklch,var(--on-navy) 55%,transparent)}
+
+/* переключатель для сравнения вариантов */
+.variant-switch{position:fixed;left:var(--s-4);bottom:var(--s-4);z-index:var(--z-overlay);display:flex;align-items:center;gap:var(--s-3);padding:var(--s-2) var(--s-2) var(--s-2) var(--s-4);background:var(--ink);color:var(--on-navy);border-radius:var(--r-pill);font-size:var(--t-xs);line-height:var(--l-xs);box-shadow:0 12px 32px -12px oklch(0.2 0.06 263 / .6)}
+.variant-switch a{display:inline-flex;align-items:center;height:32px;padding:0 var(--s-3);border-radius:var(--r-s);background:var(--on-navy);color:var(--ink);font-weight:600;text-decoration:none}
+@media (max-width:640px){.variant-switch{left:var(--s-2);right:var(--s-2);justify-content:space-between}}

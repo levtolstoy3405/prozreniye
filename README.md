@@ -12,10 +12,11 @@
 | `sait/index.html` | Главная |
 | `sait/index-v2.html` | Вторая главная «Спокойствие»: фото под «шторкой», день в клинике, сценарий операции |
 | `sait/*.html` | Лазерная коррекция, катаракта, детская офтальмология, диагностика, врачи, профиль врача, цены, отзывы, о клинике |
+| `sait/strogo/` | Строгая версия всего сайта: антиква в заголовках, прямые углы |
 
 ## Как посмотреть
 
-Онлайн: https://prozreniye.vercel.app (обзор вариантов), https://prozreniye.vercel.app/sait/ (сайт), https://prozreniye.vercel.app/sait/index-v2.html (вторая главная).
+Онлайн: https://prozreniye.vercel.app (обзор вариантов), https://prozreniye.vercel.app/sait/ (сайт), https://prozreniye.vercel.app/sait/strogo/ (строгая версия), https://prozreniye.vercel.app/sait/index-v2.html (вторая главная).
 
 Локально:
 
@@ -33,7 +34,9 @@ python3 -m http.server 4321
 
 - `sait/src/*.html` — содержимое страниц
 - `sait/partials/` — общие шапка, подвал, блок записи
-- `sait/assets/site.css` — дизайн-система (сетка, шрифты, отступы, компоненты), `home-v2.css` — стили второй главной
+- `sait/assets/site.css` — дизайн-система (сетка, шрифты, отступы, компоненты), `home-v2.css` — стили второй главной, `serif.css` — строгая версия
+
+`build.py` собирает сразу две версии: `sait/` и `sait/strogo/`. Тексты общие.
 
 После правок:
 

@@ -133,7 +133,7 @@
     <div class="vis">${['Вдаль','Компьютер','Чтение'].map((x,i)=>`<div class="${r.v[i]?'on':''}">${x}<i></i></div>`).join('')}</div>
     <div class="foot"><div class="cost num">от ${fmt(from)}<small>операция + линза</small></div><a class="btn btn-light" href="#book" data-service="cat">Обсудить с хирургом</a></div></div>`;
     tb.innerHTML=L.map((l,i)=>`<tr class="${r.ids.includes(i)?'hl':''}"><td>${l[0]}</td><td>${l[1]}</td><td class="num">${fmt(l[2])}</td></tr>`).join('');
-    rec.querySelector('[data-service]').addEventListener('click',()=>{const s=document.querySelector('#book select[name="service"]');if(s)s.value='cat'});}
+    rec.querySelector('[data-service]').addEventListener('click',()=>{const s=document.querySelector('#book select[name="service"]');if(s){s.value='cat';s.dispatchEvent(new Event('change'))}});}
   document.querySelectorAll('#opts button').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('#opts button').forEach(x=>x.setAttribute('aria-pressed',x===b));pick(+b.dataset.k)}));
   pick(0);

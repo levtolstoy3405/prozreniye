@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV,SHRP@300..800,0,0..60&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=7f5852db">
+<link rel="stylesheet" href="assets/site.css?v=15912783">
 <script>if(document.visibilityState==="visible"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("anim")</script>
 </head>
 <body class="">
@@ -169,20 +169,20 @@
       <p class="intro">Оставьте номер, и администратор перезвонит в рабочее время: подберёт удобный день и расскажет, как подготовиться.</p>
       <form data-demo>
         <div class="row">
-          <label>Имя<input required placeholder="Как к вам обращаться" autocomplete="given-name"></label>
-          <label>Телефон<input required type="tel" placeholder="+7 ___ ___-__-__" autocomplete="tel"></label>
+          <label>Имя<input required name="name" data-name placeholder="Как к вам обращаться" autocomplete="given-name" maxlength="60"></label>
+          <label>Телефон<input required type="tel" name="phone" data-phone inputmode="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel" maxlength="18"><span class="ferr" aria-live="polite"></span></label>
         </div>
         <div class="row">
-          <label>Услуга<select name="service"><option value="diag">Диагностика зрения</option><option value="lkz">Лазерная коррекция</option><option value="cat">Хирургия катаракты</option><option value="kids">Детская офтальмология</option><option value="retina">Лечение сетчатки</option><option value="unknown">Пока не знаю</option></select></label>
-          <label>Врач<select name="doc"><option value="any">Любой свободный</option><option value="aliev">Алиев А. А.-Г.</option><option value="nurudinov">Нурудинов М. М.</option><option value="abdulaev">Абдулаев А. Б.</option><option value="zakieva">Закиева С. И.</option><option value="kazieva">Казиева А. Г.</option></select></label>
+          <div class="field"><span class="flabel" id="lbl-service">Услуга</span><select name="service" aria-labelledby="lbl-service"><option value="diag">Диагностика зрения</option><option value="lkz">Лазерная коррекция</option><option value="cat">Хирургия катаракты</option><option value="kids">Детская офтальмология</option><option value="retina">Лечение сетчатки</option><option value="unknown">Пока не знаю</option></select></div>
+          <div class="field"><span class="flabel" id="lbl-doc">Врач</span><select name="doc" aria-labelledby="lbl-doc"><option value="any">Любой свободный</option><option value="aliev">Алиев А. А.-Г.</option><option value="nurudinov">Нурудинов М. М.</option><option value="abdulaev">Абдулаев А. Б.</option><option value="zakieva">Закиева С. И.</option><option value="kazieva">Казиева А. Г.</option></select></div>
         </div>
-        <label class="agree"><input type="checkbox" required> Согласен с обработкой персональных данных</label>
+        <label class="agree"><input type="checkbox" required> <span>Согласен с <a href="politika.html" target="_blank">обработкой персональных данных</a></span></label>
         <button class="btn btn-navy">Отправить заявку</button>
         <div class="ok">Спасибо! Это демо-форма: в рабочей версии заявка уйдёт администратору.</div>
       </form>
     </div>
     <div>
-      <div class="photo"><img src="https://prozrenie-clinic.ru/_nuxt/img/m_about-1.4be447d.jpg" alt="Здание клиники «Прозрение» на проспекте Имама Шамиля" style="object-position:center 35%" loading="lazy"></div>
+      <div class="photo"><img src="https://admin.prozrenie-clinic.ru/uploads/Vhod_v_kliniku_V_4205802c66.jpeg" alt="Вход в клинику «Прозрение» на проспекте Имама Шамиля" style="object-position:center 35%" loading="lazy"></div>
       <dl>
         <dt>Адрес</dt><dd>Махачкала, проспект Имама Шамиля, 18д</dd>
         <dt>Часы</dt><dd>Пн–Сб 9:00–19:00, Вс 10:00–18:00</dd>
@@ -213,7 +213,7 @@
     <div class="vis">${['Вдаль','Компьютер','Чтение'].map((x,i)=>`<div class="${r.v[i]?'on':''}">${x}<i></i></div>`).join('')}</div>
     <div class="foot"><div class="cost num">от ${fmt(from)}<small>операция + линза</small></div><a class="btn btn-light" href="#book" data-service="cat">Обсудить с хирургом</a></div></div>`;
     tb.innerHTML=L.map((l,i)=>`<tr class="${r.ids.includes(i)?'hl':''}"><td>${l[0]}</td><td>${l[1]}</td><td class="num">${fmt(l[2])}</td></tr>`).join('');
-    rec.querySelector('[data-service]').addEventListener('click',()=>{const s=document.querySelector('#book select[name="service"]');if(s)s.value='cat'});}
+    rec.querySelector('[data-service]').addEventListener('click',()=>{const s=document.querySelector('#book select[name="service"]');if(s){s.value='cat';s.dispatchEvent(new Event('change'))}});}
   document.querySelectorAll('#opts button').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('#opts button').forEach(x=>x.setAttribute('aria-pressed',x===b));pick(+b.dataset.k)}));
   pick(0);
@@ -230,7 +230,7 @@
       <div><h4>Клиника</h4><ul><li><a href="o-klinike.html">О клинике</a></li><li><a href="vrachi.html">Врачи</a></li><li><a href="ceny.html">Цены</a></li><li><a href="otzyvy.html">Отзывы</a></li><li><a href="o-klinike.html#licenzii">Лицензии</a></li></ul></div>
       <div><h4>Связаться</h4><a class="big-tel num" href="tel:+79896608788">+7 989 660-87-88</a><ul><li>пр. Имама Шамиля, 18д</li><li>Пн–Сб 9–19, Вс 10–18</li><li><a href="mailto:prozrenie05@mail.ru">prozrenie05@mail.ru</a></li><li><a href="https://wa.me/79896608788" target="_blank" rel="noopener">Написать в WhatsApp</a></li></ul></div>
     </div>
-    <div class="foot-bot"><span>© ООО «ПРО-ЗРЕНИЕ», Махачкала</span><a href="#">Версия для слабовидящих</a><a href="https://prozrenie-clinic.ru/privacy/" target="_blank" rel="noopener">Политика обработки данных</a><span>Имеются противопоказания, необходима консультация специалиста</span></div>
+    <div class="foot-bot"><span>© ООО «ПРО-ЗРЕНИЕ», Махачкала</span><a href="#">Версия для слабовидящих</a><a href="politika.html">Политика обработки данных</a><span>Имеются противопоказания, необходима консультация специалиста</span></div>
   </div>
 </footer>
 <dialog class="vmodal" id="vmodal" aria-label="Видеоотзыв">
@@ -239,7 +239,7 @@
 </dialog>
 <div class="grid-overlay" aria-hidden="true"><div class="wrap"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
 <div class="grid-badge" aria-hidden="true"></div>
-<script src="assets/site.js?v=7f5852db"></script>
+<script src="assets/site.js?v=15912783"></script>
 </body>
 </html>
 

@@ -46,7 +46,7 @@
 .sheet::before{content:"";position:absolute;left:50%;top:var(--s-3);width:48px;height:4px;margin-left:-24px;border-radius:2px;background:var(--line)}
 
 /* ---------- три вещи, которые важно знать: 3 × 4 колонки ---------- */
-.calm{padding-block:var(--s-9) var(--section)}
+.calm{padding-block:var(--s-8) var(--section)}
 .calm .head{margin-bottom:var(--s-7)}
 .facts3{row-gap:var(--gutter)}
 .facts3>div{grid-column:span 4;border-radius:var(--r-l);background:var(--surface);padding:var(--s-6);display:flex;flex-direction:column;gap:var(--s-3);min-height:256px}
@@ -120,13 +120,13 @@
 
 /* ---------- услуги карточками: 4 × 3 ---------- */
 .svc4{row-gap:var(--gutter)}
-.svc4 a{grid-column:span 3;display:flex;flex-direction:column;gap:var(--s-2);min-height:224px;padding:var(--s-5);border-radius:var(--r-l);background:var(--surface);text-decoration:none;transition:background .3s,transform .5s var(--ease)}
-.svc4 a:hover{background:var(--surface-2);transform:translateY(-4px)}
+.svc4 a{grid-column:span 3;display:flex;flex-direction:column;gap:var(--s-2);min-height:224px;padding:var(--s-5);border-radius:var(--r-l);background:var(--surface);text-decoration:none;transition:background .3s}
+.svc4 a:hover{background:var(--surface-2)}
 .svc4 h3{font-size:var(--t-l);line-height:28px}
 .svc4 p{font-size:var(--t-s);line-height:var(--l-s);color:var(--muted)}
 .svc4 .pr{margin-top:auto;display:flex;justify-content:space-between;align-items:center;color:var(--ink);font-weight:600}
-.svc4 .pr span{width:40px;height:40px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-weight:400;transition:transform .4s var(--ease)}
-.svc4 a:hover .pr span{transform:rotate(-45deg)}
+.svc4 .pr span{width:40px;height:40px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-weight:400}
+.svc4 a:hover .pr span i{transform:rotate(-45deg)}
 
 /* светлая полоса цифр и блоки врачей */
 .v2 .ledger{border:0;background:var(--bg)}

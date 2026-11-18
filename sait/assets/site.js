@@ -30,21 +30,173 @@
   vm?.addEventListener('click', e => { if (e.target === vm) vm.close(); });
   vm?.querySelector('[data-close-video]')?.addEventListener('click', () => vm.close());
 
-  // демо-формы: ничего не отправляют
-  document.querySelectorAll('form[data-demo]').forEach(f => f.addEventListener('submit', e => {
-    e.preventDefault(); f.classList.add('sent');
+  // ---------- форма записи ----------
+  // имя: только буквы, пробел, дефис
+  document.querySelectorAll('input[data-name]').forEach(inp => inp.addEventListener('input', () => {
+    const v = inp.value.replace(/[^A-Za-zА-Яа-яЁё\s'-]/g, '').replace(/\s{2,}/g, ' ');
+    if (v !== inp.value) inp.value = v;
   }));
+
+  // телефон: только цифры, маска +7 (999) 123-45-67
+  const fmtPhone = raw => {
+    let d = raw.replace(/\D/g, '');
+    if (!d) return '';
+    if (d[0] === '8') d = '7' + d.slice(1);
+    if (d[0] !== '7') d = '7' + d;
+    d = d.slice(0, 11);
+    let out = '+7';
+    if (d.length > 1) out += ' (' + d.slice(1, 4);
+    if (d.length >= 4) out += ')';
+    if (d.length > 4) out += ' ' + d.slice(4, 7);
+    if (d.length > 7) out += '-' + d.slice(7, 9);
+    if (d.length > 9) out += '-' + d.slice(9, 11);
+    return out;
+  };
+  document.querySelectorAll('input[data-phone]').forEach(inp => {
+    const err = inp.parentElement.querySelector('.ferr');
+    inp.addEventListener('input', () => {
+      inp.value = fmtPhone(inp.value);
+      inp.classList.remove('bad'); if (err) err.textContent = '';
+    });
+    inp.addEventListener('blur', () => { if (inp.value.replace(/\D/g, '').length <= 1) inp.value = ''; });
+  });
+
+  // демо-формы: проверяем номер и ничего не отправляем
+  document.querySelectorAll('form[data-demo]').forEach(f => f.addEventListener('submit', e => {
+    e.preventDefault();
+    const ph = f.querySelector('input[data-phone]');
+    if (ph && ph.value.replace(/\D/g, '').length !== 11) {
+      ph.classList.add('bad');
+      const err = ph.parentElement.querySelector('.ferr');
+      if (err) err.textContent = 'Введите номер полностью: 10 цифр после +7';
+      ph.focus();
+      return;
+    }
+    f.classList.add('sent');
+  }));
+
+  // свои выпадающие списки вместо системных: наведение на компьютере, нажатие на телефоне, клавиатура
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  document.querySelectorAll('form select').forEach((sel, n) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'dsel';
+    sel.parentNode.insertBefore(wrap, sel);
+    wrap.appendChild(sel);
+    sel.classList.add('dsel-native'); sel.tabIndex = -1; sel.setAttribute('aria-hidden', 'true');
+    const lbl = sel.getAttribute('aria-labelledby');
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'dsel-btn'; btn.id = 'dsel-btn-' + n;
+    btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false');
+    if (lbl) btn.setAttribute('aria-labelledby', lbl + ' ' + btn.id);
+    btn.innerHTML = '<span class="dsel-val"></span><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4.5 6 8.5l4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+    const list = document.createElement('ul');
+    list.className = 'dsel-list'; list.setAttribute('role', 'listbox'); list.id = 'dsel-list-' + n;
+    if (lbl) list.setAttribute('aria-labelledby', lbl);
+    btn.setAttribute('aria-controls', list.id);
+    [...sel.options].forEach((o, i) => {
+      const li = document.createElement('li');
+      li.setAttribute('role', 'option'); li.id = list.id + '-' + i; li.dataset.value = o.value; li.textContent = o.textContent;
+      list.appendChild(li);
+    });
+    wrap.append(btn, list);
+    const items = [...list.children];
+    let active = sel.selectedIndex, t;
+    const sync = () => {
+      btn.querySelector('.dsel-val').textContent = sel.options[sel.selectedIndex].textContent;
+      items.forEach((li, i) => li.setAttribute('aria-selected', i === sel.selectedIndex));
+    };
+    const mark = i => { active = (i + items.length) % items.length; items.forEach((li, k) => li.classList.toggle('active', k === active)); btn.setAttribute('aria-activedescendant', items[active].id); };
+    const open = () => { clearTimeout(t); wrap.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); mark(sel.selectedIndex); };
+    const close = () => { wrap.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.removeAttribute('aria-activedescendant'); };
+    const choose = i => { sel.selectedIndex = i; sel.dispatchEvent(new Event('change')); close(); btn.focus(); };
+    btn.addEventListener('click', () => wrap.classList.contains('open') ? close() : open());
+    if (finePointer) {
+      wrap.addEventListener('mouseenter', open);
+      wrap.addEventListener('mouseleave', () => { t = setTimeout(close, 180); });
+    }
+    items.forEach((li, i) => {
+      li.addEventListener('click', () => choose(i));
+      li.addEventListener('mousemove', () => mark(i));
+    });
+    btn.addEventListener('keydown', e => {
+      const isOpen = wrap.classList.contains('open');
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (!isOpen) open(); else mark(active + (e.key === 'ArrowDown' ? 1 : -1)); }
+      else if (e.key === 'Home' && isOpen) { e.preventDefault(); mark(0); }
+      else if (e.key === 'End' && isOpen) { e.preventDefault(); mark(items.length - 1); }
+      else if ((e.key === 'Enter' || e.key === ' ') && isOpen) { e.preventDefault(); choose(active); }
+      else if (e.key === 'Escape' && isOpen) { e.preventDefault(); close(); }
+      else if (e.key === 'Tab') close();
+    });
+    document.addEventListener('click', e => { if (!wrap.contains(e.target)) close(); });
+    sel.addEventListener('change', sync);
+    sync();
+  });
 
   // «Записаться» на услугу или к врачу: выбираем пункт в форме без перезагрузки
   const pick = (name, val) => {
     const sel = document.querySelector(`#book select[name="${name}"]`);
-    if (sel && val) [...sel.options].forEach(o => { if (o.value === val) o.selected = true; });
+    if (sel && val && [...sel.options].some(o => o.value === val)) { sel.value = val; sel.dispatchEvent(new Event('change')); }
   };
   const q = new URLSearchParams(location.search);
   pick('service', q.get('service')); pick('doc', q.get('doc'));
   document.querySelectorAll('a[data-service], a[data-doc]').forEach(a => a.addEventListener('click', () => {
     pick('service', a.dataset.service); pick('doc', a.dataset.doc);
   }));
+
+  // шаги: загораются по очереди, когда блок попадает на экран (один раз).
+  // До старта остаётся обычное состояние (горит последний шаг).
+  if (document.documentElement.classList.contains('anim')) {
+    document.querySelectorAll('.steps').forEach(box => {
+      const items = [...box.querySelectorAll('.step')];
+      if (items.length < 2) return;
+      let started = false;
+      const run = () => {
+        started = true;
+        box.classList.add('seq');
+        let i = 0;
+        const next = () => {
+          items.forEach((el, k) => el.classList.toggle('lit', k === i));
+          if (i === items.length - 1) return;
+          setTimeout(() => { items[i].classList.add('flow'); setTimeout(() => { i++; next(); }, 700); }, 650);
+        };
+        next();
+      };
+      const check = () => {
+        if (started) return;
+        const r = box.getBoundingClientRect();
+        if (r.top < innerHeight * 0.7 && r.bottom > innerHeight * 0.2) { removeEventListener('scroll', check); run(); }
+      };
+      addEventListener('scroll', check, { passive: true });
+      check();
+    });
+  }
+
+  // FAQ: плавное раскрытие и сворачивание ответов
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.faq details').forEach(d => {
+    const sum = d.querySelector('summary');
+    let anim = null;
+    sum.addEventListener('click', e => {
+      if (calm) return;
+      e.preventDefault();
+      if (anim) { anim.cancel(); anim = null; }
+      if (d.classList.contains('closing')) { d.classList.remove('closing'); return; }
+      const from = d.offsetHeight;
+      if (d.open) {
+        d.classList.add('closing');
+        anim = d.animate({ height: [from + 'px', sum.offsetHeight + 'px'] }, { duration: 380, easing: 'cubic-bezier(.16,1,.3,1)' });
+        const done = () => { if (!d.classList.contains('closing')) return; d.open = false; d.classList.remove('closing'); anim = null; };
+        anim.onfinish = done; setTimeout(done, 450);
+      } else {
+        d.open = true;
+        d.classList.add('opening');
+        const to = d.offsetHeight;
+        setTimeout(() => d.classList.remove('opening'), 30);
+        anim = d.animate({ height: [from + 'px', to + 'px'] }, { duration: 420, easing: 'cubic-bezier(.16,1,.3,1)' });
+        anim.onfinish = () => { anim = null; };
+      }
+    });
+  });
 
   // оверлей сетки: G — колонки, Shift+G — плюс базовая линия 8px, ?grid в адресе — сразу включено
   const root = document.documentElement, badge = document.querySelector('.grid-badge');

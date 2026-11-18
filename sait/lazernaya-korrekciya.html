@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV,SHRP@300..800,0,0..60&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=7f5852db">
+<link rel="stylesheet" href="assets/site.css?v=15912783">
 <script>if(document.visibilityState==="visible"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("anim")</script>
 </head>
 <body class="">
@@ -65,12 +65,15 @@
     </div>
     <div class="iris-wrap">
       <div class="iris"><img src="https://images.unsplash.com/photo-1705071393219-7c0c65afa314?auto=format&fit=crop&w=1100&q=80" alt="Радужная оболочка глаза крупным планом"></div>
-      <svg class="reticle" viewBox="0 0 400 400" aria-hidden="true">
-        <circle class="draw" cx="200" cy="200" r="190" opacity=".35"/>
-        <circle class="draw" cx="200" cy="200" r="162" opacity=".6"/>
-        <line class="draw" x1="200" y1="0" x2="200" y2="60"/><line class="draw" x1="200" y1="340" x2="200" y2="400"/>
-        <line class="draw" x1="0" y1="200" x2="60" y2="200"/><line class="draw" x1="340" y1="200" x2="400" y2="200"/>
-      </svg>
+      <div class="diopter" aria-hidden="true">
+        <svg viewBox="0 0 600 62">
+          <line class="base" x1="12" y1="14" x2="588" y2="14"/>
+          <g class="ticks"><line x1="12.0" y1="14" x2="12.0" y2="34"/><line x1="36.0" y1="14" x2="36.0" y2="21"/><line x1="60.0" y1="14" x2="60.0" y2="28"/><line x1="84.0" y1="14" x2="84.0" y2="21"/><line x1="108.0" y1="14" x2="108.0" y2="28"/><line x1="132.0" y1="14" x2="132.0" y2="21"/><line x1="156.0" y1="14" x2="156.0" y2="34"/><line x1="180.0" y1="14" x2="180.0" y2="21"/><line x1="204.0" y1="14" x2="204.0" y2="28"/><line x1="228.0" y1="14" x2="228.0" y2="21"/><line x1="252.0" y1="14" x2="252.0" y2="28"/><line x1="276.0" y1="14" x2="276.0" y2="21"/><line x1="300.0" y1="14" x2="300.0" y2="34"/><line x1="324.0" y1="14" x2="324.0" y2="21"/><line x1="348.0" y1="14" x2="348.0" y2="28"/><line x1="372.0" y1="14" x2="372.0" y2="21"/><line x1="396.0" y1="14" x2="396.0" y2="28"/><line x1="420.0" y1="14" x2="420.0" y2="21"/><line x1="444.0" y1="14" x2="444.0" y2="34"/><line x1="468.0" y1="14" x2="468.0" y2="21"/><line x1="492.0" y1="14" x2="492.0" y2="28"/><line x1="516.0" y1="14" x2="516.0" y2="21"/><line x1="540.0" y1="14" x2="540.0" y2="28"/><line x1="564.0" y1="14" x2="564.0" y2="21"/><line x1="588.0" y1="14" x2="588.0" y2="34"/></g>
+          <g class="lab"><text x="12.0" y="56">−6</text><text x="156.0" y="56">−3</text><text x="300.0" y="56">0</text><text x="444.0" y="56">+3</text><text x="588.0" y="56">+6</text></g>
+          <g class="mark" style="--shift:-144.0px"><path d="M294.0 0 L306.0 0 L300.0 9 Z"/><line x1="300.0" y1="9" x2="300.0" y2="38"/></g>
+        </svg>
+        <span class="unit">диоптрии</span>
+      </div>
     </div>
     <div class="kfacts rise">
         <div><b class="num">12 500+</b><span>коррекций в клинике</span></div>
@@ -149,11 +152,33 @@
       <h2>Что меняется после</h2>
       <p>Не нужно искать очки утром, протирать их на морозе и выбирать спорт, где они не мешают.</p>
     </div>
-    <div class="result">
-      <figure class="big"><img src="https://images.unsplash.com/photo-1721377043701-8053647f07f0?auto=format&fit=crop&w=1400&q=80" alt="Горная долина под облачным небом" loading="lazy"><figcaption><b>Горы видно до самого горизонта</b><span>без бликов на стёклах и запотевших линз</span></figcaption></figure>
-      <figure><img src="https://images.unsplash.com/photo-1534708112740-cb40ecb0663e?auto=format&fit=crop&w=900&q=80" alt="Улыбающаяся женщина за рулём в солнечный день" loading="lazy"><figcaption><b>За рулём</b><span>дорожные знаки читаются издалека</span></figcaption></figure>
-      <figure><img src="https://images.unsplash.com/photo-1629290211578-213dc1f621e1?auto=format&fit=crop&w=900&q=80" alt="Глаз крупным планом" loading="lazy"><figcaption><b>Без линз</b><span>не нужно ухаживать за ними каждый день</span></figcaption></figure>
-    </div>
+    <ol class="after">
+      <li>
+        <figure><img src="https://images.unsplash.com/photo-1721377043701-8053647f07f0?auto=format&fit=crop&w=1000&q=80" alt="Горная долина под облачным небом" loading="lazy"></figure>
+        <div class="txt">
+          <span class="role">Вдаль</span>
+          <h3>Видно до самого горизонта</h3>
+          <p>Лица знакомых через улицу, номера маршруток, вид с перевала — без очков. Стёкла больше не бликуют на солнце и не запотевают, когда заходишь с мороза в тепло.</p>
+        </div>
+      </li>
+      <li>
+        <figure><img src="https://images.unsplash.com/photo-1534708112740-cb40ecb0663e?auto=format&fit=crop&w=1000&q=80" alt="Улыбающаяся женщина за рулём в солнечный день" loading="lazy"></figure>
+        <div class="txt">
+          <span class="role">За рулём</span>
+          <h3>Знаки читаются издалека</h3>
+          <p>Не нужно держать очки в бардачке и искать их перед поездкой. В дождь и снег не приходится протирать стёкла: на дорогу смотрите своими глазами.</p>
+        </div>
+      </li>
+      <li>
+        <figure><img src="https://images.unsplash.com/photo-1629290211578-213dc1f621e1?auto=format&fit=crop&w=1000&q=80" alt="Глаз крупным планом" loading="lazy"></figure>
+        <div class="txt">
+          <span class="role">Каждый день</span>
+          <h3>Без линз и раствора</h3>
+          <p>Утро начинается без поисков очков, контейнера и раствора. Можно плавать, заниматься спортом и путешествовать, не думая о запасной паре.</p>
+          <p class="note">Возвращение к обычной жизни — со второго дня после коррекции. Ограничения на первые недели объяснит хирург.</p>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -209,20 +234,20 @@
       <p class="intro">Оставьте номер, и администратор перезвонит в рабочее время: подберёт удобный день и расскажет, как подготовиться.</p>
       <form data-demo>
         <div class="row">
-          <label>Имя<input required placeholder="Как к вам обращаться" autocomplete="given-name"></label>
-          <label>Телефон<input required type="tel" placeholder="+7 ___ ___-__-__" autocomplete="tel"></label>
+          <label>Имя<input required name="name" data-name placeholder="Как к вам обращаться" autocomplete="given-name" maxlength="60"></label>
+          <label>Телефон<input required type="tel" name="phone" data-phone inputmode="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel" maxlength="18"><span class="ferr" aria-live="polite"></span></label>
         </div>
         <div class="row">
-          <label>Услуга<select name="service"><option value="diag">Диагностика зрения</option><option value="lkz">Лазерная коррекция</option><option value="cat">Хирургия катаракты</option><option value="kids">Детская офтальмология</option><option value="retina">Лечение сетчатки</option><option value="unknown">Пока не знаю</option></select></label>
-          <label>Врач<select name="doc"><option value="any">Любой свободный</option><option value="aliev">Алиев А. А.-Г.</option><option value="nurudinov">Нурудинов М. М.</option><option value="abdulaev">Абдулаев А. Б.</option><option value="zakieva">Закиева С. И.</option><option value="kazieva">Казиева А. Г.</option></select></label>
+          <div class="field"><span class="flabel" id="lbl-service">Услуга</span><select name="service" aria-labelledby="lbl-service"><option value="diag">Диагностика зрения</option><option value="lkz">Лазерная коррекция</option><option value="cat">Хирургия катаракты</option><option value="kids">Детская офтальмология</option><option value="retina">Лечение сетчатки</option><option value="unknown">Пока не знаю</option></select></div>
+          <div class="field"><span class="flabel" id="lbl-doc">Врач</span><select name="doc" aria-labelledby="lbl-doc"><option value="any">Любой свободный</option><option value="aliev">Алиев А. А.-Г.</option><option value="nurudinov">Нурудинов М. М.</option><option value="abdulaev">Абдулаев А. Б.</option><option value="zakieva">Закиева С. И.</option><option value="kazieva">Казиева А. Г.</option></select></div>
         </div>
-        <label class="agree"><input type="checkbox" required> Согласен с обработкой персональных данных</label>
+        <label class="agree"><input type="checkbox" required> <span>Согласен с <a href="politika.html" target="_blank">обработкой персональных данных</a></span></label>
         <button class="btn btn-navy">Отправить заявку</button>
         <div class="ok">Спасибо! Это демо-форма: в рабочей версии заявка уйдёт администратору.</div>
       </form>
     </div>
     <div>
-      <div class="photo"><img src="https://prozrenie-clinic.ru/_nuxt/img/m_about-1.4be447d.jpg" alt="Здание клиники «Прозрение» на проспекте Имама Шамиля" style="object-position:center 35%" loading="lazy"></div>
+      <div class="photo"><img src="https://admin.prozrenie-clinic.ru/uploads/Vhod_v_kliniku_V_4205802c66.jpeg" alt="Вход в клинику «Прозрение» на проспекте Имама Шамиля" style="object-position:center 35%" loading="lazy"></div>
       <dl>
         <dt>Адрес</dt><dd>Махачкала, проспект Имама Шамиля, 18д</dd>
         <dt>Часы</dt><dd>Пн–Сб 9:00–19:00, Вс 10:00–18:00</dd>
@@ -244,7 +269,7 @@
       <div><h4>Клиника</h4><ul><li><a href="o-klinike.html">О клинике</a></li><li><a href="vrachi.html">Врачи</a></li><li><a href="ceny.html">Цены</a></li><li><a href="otzyvy.html">Отзывы</a></li><li><a href="o-klinike.html#licenzii">Лицензии</a></li></ul></div>
       <div><h4>Связаться</h4><a class="big-tel num" href="tel:+79896608788">+7 989 660-87-88</a><ul><li>пр. Имама Шамиля, 18д</li><li>Пн–Сб 9–19, Вс 10–18</li><li><a href="mailto:prozrenie05@mail.ru">prozrenie05@mail.ru</a></li><li><a href="https://wa.me/79896608788" target="_blank" rel="noopener">Написать в WhatsApp</a></li></ul></div>
     </div>
-    <div class="foot-bot"><span>© ООО «ПРО-ЗРЕНИЕ», Махачкала</span><a href="#">Версия для слабовидящих</a><a href="https://prozrenie-clinic.ru/privacy/" target="_blank" rel="noopener">Политика обработки данных</a><span>Имеются противопоказания, необходима консультация специалиста</span></div>
+    <div class="foot-bot"><span>© ООО «ПРО-ЗРЕНИЕ», Махачкала</span><a href="#">Версия для слабовидящих</a><a href="politika.html">Политика обработки данных</a><span>Имеются противопоказания, необходима консультация специалиста</span></div>
   </div>
 </footer>
 <dialog class="vmodal" id="vmodal" aria-label="Видеоотзыв">
@@ -253,7 +278,7 @@
 </dialog>
 <div class="grid-overlay" aria-hidden="true"><div class="wrap"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
 <div class="grid-badge" aria-hidden="true"></div>
-<script src="assets/site.js?v=7f5852db"></script>
+<script src="assets/site.js?v=15912783"></script>
 </body>
 </html>
 
