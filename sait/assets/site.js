@@ -5,6 +5,36 @@
   document.querySelectorAll('[data-open-menu]').forEach(b => b.addEventListener('click', () => menu.showModal()));
   menu?.querySelectorAll('[data-close-menu], nav a').forEach(el => el.addEventListener('click', () => menu.close()));
 
+  // ---------- версия для слабовидящих: действует на всех страницах и запоминается ----------
+  const A11Y_KEY = 'prozrenie-a11y', KEYS = ['fs', 'scheme', 'img', 'ls', 'lh', 'ff'];
+  const A11Y_DEF = { on: true, fs: '2', scheme: 'bw', img: 'on', ls: '1', lh: '1', ff: '' };
+  const html = document.documentElement;
+  const loadA = () => { try { return JSON.parse(localStorage.getItem(A11Y_KEY) || 'null'); } catch (e) { return null; } };
+  const saveA = st => { try { localStorage.setItem(A11Y_KEY, JSON.stringify(st)); } catch (e) {} };
+  let A = loadA() || { on: false };
+  const applyA = () => {
+    if (A.on) { html.setAttribute('data-a11y', ''); KEYS.forEach(k => A[k] ? html.setAttribute('data-' + k, A[k]) : html.removeAttribute('data-' + k)); }
+    else { html.removeAttribute('data-a11y'); KEYS.forEach(k => html.removeAttribute('data-' + k)); }
+    document.querySelectorAll('[data-a11y-set]').forEach(b => b.setAttribute('aria-pressed', String(A.on && A[b.dataset.a11ySet] === b.dataset.val)));
+    document.querySelectorAll('[data-a11y-toggle]').forEach(b => b.setAttribute('aria-pressed', String(!!A.on)));
+  };
+  document.querySelectorAll('[data-a11y-toggle]').forEach(b => b.addEventListener('click', () => {
+    if (menu && menu.open) menu.close();
+    if (!A.on) A = { ...A11Y_DEF, ...(A.saved || {}), on: true };
+    saveA(A); applyA();
+    scrollTo({ top: 0, behavior: 'auto' });
+    document.querySelector('#a11yPanel button')?.focus();
+  }));
+  document.querySelectorAll('[data-a11y-set]').forEach(b => b.addEventListener('click', () => {
+    A[b.dataset.a11ySet] = b.dataset.val; saveA(A); applyA();
+  }));
+  document.querySelector('[data-a11y-reset]')?.addEventListener('click', () => { A = { ...A11Y_DEF }; saveA(A); applyA(); });
+  document.querySelector('[data-a11y-exit]')?.addEventListener('click', () => {
+    const { on, saved, ...cur } = A; A = { on: false, saved: cur }; saveA(A); applyA();
+    document.querySelector('[data-a11y-toggle]')?.focus();
+  });
+  applyA();
+
   // выпадающее меню «Услуги»: наведение на десктопе, клик и клавиатура везде
   document.querySelectorAll('.dd').forEach(dd => {
     const btn = dd.querySelector('.dd-btn');

@@ -33,7 +33,7 @@ def render(src, body_extra, css_extra, prefix, switch):
     body = body.replace('{{HEADER}}', header)
     body = body.replace('{{FOOTER}}', (switch.format(page=src.name) if switch else '') + P['footer'])
     body = re.sub(r'\{\{BOOKING:(.+?)\}\}', lambda m: P['booking'].replace('{{BOOK_TITLE}}', m.group(1)), body)
-    html = (out + body).replace('assets/site.css"', f'assets/site.css?v={VER}"').replace('assets/site.js"', f'assets/site.js?v={VER}"')
+    html = (out + body).replace('assets/site.css"', f'assets/site.css?v={VER}"').replace('assets/site.js"', f'assets/site.js?v={VER}"').replace('assets/a11y.css"', f'assets/a11y.css?v={VER}"')
     if 'id="book"' not in html:  # на странице нет формы записи — ведём к форме на главной
         html = html.replace('href="#book"', 'href="index.html#book"')
     if prefix:

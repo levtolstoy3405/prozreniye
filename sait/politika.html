@@ -8,11 +8,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV,SHRP@300..800,0,0..60&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=15912783">
-<script>if(document.visibilityState==="visible"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("anim")</script>
+<link rel="stylesheet" href="assets/site.css?v=7463c554">
+<link rel="stylesheet" href="assets/a11y.css?v=7463c554">
+<script>try{var a=JSON.parse(localStorage.getItem("prozrenie-a11y")||"null");if(a&&a.on){var h=document.documentElement;h.setAttribute("data-a11y","");["fs","scheme","img","ls","lh","ff"].forEach(function(k){if(a[k])h.setAttribute("data-"+k,a[k])})}}catch(e){}</script>
+<script>if(!document.documentElement.hasAttribute("data-a11y")&&document.visibilityState==="visible"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("anim")</script>
 </head>
 <body class="">
 <a class="skip" href="#main">К содержимому</a>
+<div class="a11y-panel" id="a11yPanel" role="region" aria-label="Настройки версии для слабовидящих">
+  <div class="wrap">
+    <div class="ap-g" role="group" aria-label="Размер шрифта"><span class="ap-l">Размер шрифта</span><div class="ap-b"><button type="button" data-a11y-set="fs" data-val="1" aria-pressed="false" aria-label="Обычный размер">А</button><button type="button" data-a11y-set="fs" data-val="2" aria-pressed="false" aria-label="Крупный" style="font-size:1.15em">А+</button><button type="button" data-a11y-set="fs" data-val="3" aria-pressed="false" aria-label="Очень крупный" style="font-size:1.3em">А++</button></div></div><div class="ap-g" role="group" aria-label="Цвет сайта"><span class="ap-l">Цвет сайта</span><div class="ap-b"><button type="button" data-a11y-set="scheme" data-val="bw" aria-pressed="false" aria-label="Чёрным по белому" style="color:#000;background:#fff">Ц</button><button type="button" data-a11y-set="scheme" data-val="wb" aria-pressed="false" aria-label="Белым по чёрному" style="color:#fff;background:#000">Ц</button><button type="button" data-a11y-set="scheme" data-val="blue" aria-pressed="false" aria-label="Тёмно-синим по голубому" style="color:#063462;background:#9DD1FF">Ц</button><button type="button" data-a11y-set="scheme" data-val="brown" aria-pressed="false" aria-label="Коричневым по бежевому" style="color:#4D4B43;background:#F7F3D6">Ц</button></div></div><div class="ap-g" role="group" aria-label="Изображения"><span class="ap-l">Изображения</span><div class="ap-b"><button type="button" data-a11y-set="img" data-val="on" aria-pressed="false">Вкл</button><button type="button" data-a11y-set="img" data-val="gray" aria-pressed="false" aria-label="Чёрно-белые">Ч/б</button><button type="button" data-a11y-set="img" data-val="off" aria-pressed="false" aria-label="Скрыть изображения">Выкл</button></div></div><div class="ap-g" role="group" aria-label="Интервал между буквами"><span class="ap-l">Интервал между буквами</span><div class="ap-b"><button type="button" data-a11y-set="ls" data-val="1" aria-pressed="false">Обычный</button><button type="button" data-a11y-set="ls" data-val="2" aria-pressed="false">Средний</button><button type="button" data-a11y-set="ls" data-val="3" aria-pressed="false">Большой</button></div></div><div class="ap-g" role="group" aria-label="Межстрочный интервал"><span class="ap-l">Межстрочный интервал</span><div class="ap-b"><button type="button" data-a11y-set="lh" data-val="1" aria-pressed="false" aria-label="Обычный">1</button><button type="button" data-a11y-set="lh" data-val="2" aria-pressed="false" aria-label="Полуторный">1,5</button><button type="button" data-a11y-set="lh" data-val="3" aria-pressed="false" aria-label="Двойной">2</button></div></div><div class="ap-g" role="group" aria-label="Шрифт"><span class="ap-l">Шрифт</span><div class="ap-b"><button type="button" data-a11y-set="ff" data-val="sans" aria-pressed="false">Без засечек</button><button type="button" data-a11y-set="ff" data-val="serif" aria-pressed="false">С засечками</button></div></div><div class="ap-g ap-act"><button type="button" data-a11y-reset>Сбросить</button><button type="button" data-a11y-exit>Обычная версия</button></div>
+  </div>
+</div>
 <header class="top">
   <div class="wrap">
     <a class="logo" href="index.html"><img src="https://prozrenie-clinic.ru/_nuxt/img/logo-eye.5ff75d0.png" alt=""><span>ПРОЗРЕНИЕ<small>глазная клиника</small></span></a>
@@ -31,6 +38,7 @@
     </nav>
     <a class="tel num" href="tel:+79896608788">+7 989 660-87-88</a>
     <a class="btn btn-light" href="index.html#book">Записаться</a>
+<button class="eyebtn" type="button" data-a11y-toggle aria-label="Версия для слабовидящих" title="Версия для слабовидящих"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><span class="eyelbl">Для слабовидящих</span></button>
     <a class="call" href="tel:+79896608788" aria-label="Позвонить в клинику"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
     <button class="burger" type="button" data-open-menu aria-label="Открыть меню" aria-controls="menu"><span></span></button>
   </div>
@@ -44,6 +52,7 @@
       <a href="vrachi.html">Врачи</a><a href="ceny.html">Цены</a><a href="otzyvy.html">Отзывы</a><a href="o-klinike.html">О клинике</a><a href="o-klinike.html#kontakty">Контакты</a>
     </nav>
     <div class="foot">
+      <button class="btn btn-ghost" type="button" data-a11y-toggle><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg> Версия для слабовидящих</button>
       <span>пр. Имама Шамиля, 18д · Пн–Сб 9–19, Вс 10–18</span>
       <a class="btn btn-ghost" href="tel:+79896608788">+7 989 660-87-88</a>
       <a class="btn btn-light" href="index.html#book" data-close-menu>Записаться на приём</a>
@@ -206,7 +215,7 @@
       <div><h4>Клиника</h4><ul><li><a href="o-klinike.html">О клинике</a></li><li><a href="vrachi.html">Врачи</a></li><li><a href="ceny.html">Цены</a></li><li><a href="otzyvy.html">Отзывы</a></li><li><a href="o-klinike.html#licenzii">Лицензии</a></li></ul></div>
       <div><h4>Связаться</h4><a class="big-tel num" href="tel:+79896608788">+7 989 660-87-88</a><ul><li>пр. Имама Шамиля, 18д</li><li>Пн–Сб 9–19, Вс 10–18</li><li><a href="mailto:prozrenie05@mail.ru">prozrenie05@mail.ru</a></li><li><a href="https://wa.me/79896608788" target="_blank" rel="noopener">Написать в WhatsApp</a></li></ul></div>
     </div>
-    <div class="foot-bot"><span>© ООО «ПРО-ЗРЕНИЕ», Махачкала</span><a href="#">Версия для слабовидящих</a><a href="politika.html">Политика обработки данных</a><span>Имеются противопоказания, необходима консультация специалиста</span></div>
+    <div class="foot-bot"><span>© ООО «ПРО-ЗРЕНИЕ», Махачкала</span><button type="button" class="linkbtn" data-a11y-toggle>Версия для слабовидящих</button><a href="politika.html">Политика обработки данных</a><span>Имеются противопоказания, необходима консультация специалиста</span></div>
   </div>
 </footer>
 <dialog class="vmodal" id="vmodal" aria-label="Видеоотзыв">
@@ -215,7 +224,7 @@
 </dialog>
 <div class="grid-overlay" aria-hidden="true"><div class="wrap"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
 <div class="grid-badge" aria-hidden="true"></div>
-<script src="assets/site.js?v=15912783"></script>
+<script src="assets/site.js?v=7463c554"></script>
 </body>
 </html>
 
